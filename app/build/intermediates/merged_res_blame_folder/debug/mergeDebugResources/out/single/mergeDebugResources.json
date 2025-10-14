@@ -1,0 +1,398 @@
+[
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_activity_category_detail.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/activity_category_detail.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_activity_home_frame.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/activity_home_frame.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_table_clock.jpg.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_table_clock.jpg"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_down_shadow.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/down_shadow.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_fragment_favourite.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/fragment_favourite.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_video_slider.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_video_slider.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_dialog_filter.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/dialog_filter.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_photo_frame.jpg.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_photo_frame.jpg"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_bottom_sheet_whatsapp.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/bottom_sheet_whatsapp.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_docs.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_docs.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_tab_indicator_default.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/tab_indicator_default.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_activity_main.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_videocam.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_videocam.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_bottom_sheet_background.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/bottom_sheet_background.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_rounded_button_group.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/rounded_button_group.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_category_card.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_category_card.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_catalogue_brand.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_catalogue_brand.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_search.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_search.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_activity_catalogue_builder.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/activity_catalogue_builder.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_activity_test.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/activity_test.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_logo_black.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/logo_black.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_product_card.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_product_card.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_tab_indicator_selected.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/tab_indicator_selected.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_search_off.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_search_off.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_play_circle.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_play_circle.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_filter.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_filter.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_image_slider.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_image_slider.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_fragment_search.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/fragment_search.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-hdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_catalogue_review.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_catalogue_review.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_activity_product_detail.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/activity_product_detail.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_sort.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_sort.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_dialog_background.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/dialog_background.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_activity_catalogue_review.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/activity_catalogue_review.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_catalogue_product.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_catalogue_product.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/color_toggle_button_text_color.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/color/toggle_button_text_color.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_video_card.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_video_card.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_category_chip.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_category_chip.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_button_rounded_white_corner.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/button_rounded_white_corner.xml"
+    },
+    {
+        "merged": "in.appoholics.the3s.app-debug-65:/layout_activity_catalogue_review.xml.flat",
+        "source": "in.appoholics.the3s.app-main-67:/layout/activity_catalogue_review.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/xml_file_paths.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/xml/file_paths.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_share_button_background.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/share_button_background.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_activity_splash_screen.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/activity_splash_screen.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_custom_player_view.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/custom_player_view.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_dialog_login.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/dialog_login.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_tab_selector.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/tab_selector.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_share.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_share.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/menu_bottom_nav_menu.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_favourite_large.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_favourite_large.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_filter_background_button.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/filter_background_button.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_dialog_add_margin.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/dialog_add_margin.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_selected_button.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/selected_button.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_dialog_sort.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/dialog_sort.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_whatsapp.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/whatsapp.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_fragment_home.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_back.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_back.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_background_cell_rounded_coreners.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/background_cell_rounded_coreners.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_favourite.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_favourite.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_search_on.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_search_on.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_catalogue_product_grid.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_catalogue_product_grid.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_activity_video_player.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/activity_video_player.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/color_toggle_button_background_color.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/color/toggle_button_background_color.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_placeholder_image.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/placeholder_image.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_favourite_outline.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_favourite_outline.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-mdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_button_rounded_create_catalogue.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/button_rounded_create_catalogue.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_fragment_video.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/fragment_video.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_close.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_close.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_drag_handle_shape.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/drag_handle_shape.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_home_filled.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_home_filled.png"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/xml_backup_rules.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_dialog_name_file.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/dialog_name_file.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_unselected_button.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/unselected_button.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/layout_item_catalogue_category.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/layout/item_catalogue_category.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_ic_favourite_filled.xml.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/ic_favourite_filled.xml"
+    },
+    {
+        "merged": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-debug-65:/drawable_logo_white.png.flat",
+        "source": "/Users/ashmitbhui/.gradle/daemon/8.13/in.appoholics.the3s.app-main-67:/drawable/logo_white.png"
+    }
+]

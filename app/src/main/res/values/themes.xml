@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.The3S" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement" tools:ignore="NewApi">true</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MinimalisticDotIndicator" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicatorHeight">0dp</item>
+
+        <item name="tabBackground">@drawable/tab_selector</item>
+
+        <item name="tabPaddingStart">3dp</item>
+        <item name="tabPaddingEnd">3dp</item>
+
+        <item name="tabRippleColor">@null</item>
+    </style>
+</resources>

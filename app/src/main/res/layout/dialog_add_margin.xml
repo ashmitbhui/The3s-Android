@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Price Margin"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+    <RadioGroup
+        android:id="@+id/margin_type_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+        <RadioButton android:id="@+id/radio_percentage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Percentage (%)" android:checked="true"/>
+        <RadioButton android:id="@+id/radio_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fixed Value (₹)" android:layout_marginStart="16dp"/>
+    </RadioGroup>
+    <EditText
+        android:id="@+id/margin_value_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:inputType="numberDecimal"
+        android:hint="e.g., 10 or 100"/>
+    <Button
+        android:id="@+id/apply_margin_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Apply"/>
+</LinearLayout>

@@ -1,0 +1,234 @@
+package in.appoholics.the3s;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdapter.OnProductSelectionListener {
+
+    ImageButton back;
+    private RecyclerView recyclerView;
+    private MaterialButton doneButton;
+    private MaterialButtonToggleGroup brandToggleGroup;
+    private ChipGroup categoryChipGroup;
+    private CatalogueAdapter adapter;
+
+
+    private final List<Object> displayList = new ArrayList<>();
+    private final Set<Product> selectedProducts = new HashSet<>();
+    private Map<String, Map<String, List<Product>>> groupedProducts = new HashMap<>();
+    private String selectedBrand = "3S";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_catalogue_builder);
+
+        initializeViews();
+        setupToolbar();
+        setupRecyclerView();
+        setupBrandToggle();
+        loadAllProductsFromParse();
+    }
+
+    private void initializeViews() {
+        back = findViewById(R.id.back_button);
+        recyclerView = findViewById(R.id.product_recycler_view);
+        doneButton = findViewById(R.id.done_button);
+        brandToggleGroup = findViewById(R.id.brand_toggle_group);
+        categoryChipGroup = findViewById(R.id.category_chip_group);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CatalogueBuilder.this, CatalogueReview.class);
+                intent.putParcelableArrayListExtra("SELECTED_PRODUCTS", new ArrayList<>(selectedProducts));
+                startActivity(intent);
+            }
+        });
+//        doneButton.setOnClickListener(v -> createAndSharePdf());
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setupRecyclerView() {
+        adapter = new CatalogueAdapter(this, displayList, selectedProducts, this);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                // Safety check to prevent crashing during layout changes
+                if (position >= adapter.getItemCount()) {
+                    return 1; // Return a default span size
+                }
+
+                // The original logic is now inside the safety check
+                switch (adapter.getItemViewType(position)) {
+                    case CatalogueAdapter.TYPE_BRAND:
+                    case CatalogueAdapter.TYPE_CATEGORY:
+                        return 3; // Headers span all 3 columns
+                    case CatalogueAdapter.TYPE_PRODUCT:
+                    default:
+                        return 1; // Products take 1 column
+                }
+            }
+        });
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void setupBrandToggle() {
+        brandToggleGroup.check(R.id.button_3s);
+        brandToggleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+            if (isChecked) {
+                if (checkedId == R.id.button_3s) {
+                    selectedBrand = "3S";
+                } else if (checkedId == R.id.button_verbose) {
+                    selectedBrand = "Verbose";
+                }
+                updateCategoryChipsForBrand(selectedBrand);
+            }
+        });
+    }
+
+    private void loadAllProductsFromParse() {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading Products...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        ParseQuery<ParseObject> query = new ParseQuery<>("Products");
+        query.whereEqualTo("isEnabled", true);
+        query.setLimit(1000);
+        query.findInBackground((objects, e) -> {
+            progressDialog.dismiss();
+            if (e == null) {
+                List<Product> allProducts = new ArrayList<>();
+                for (ParseObject po : objects) {
+                    allProducts.add(new Product(po.getObjectId(), po.getString("Name"), po.getString("Detail"), po.getNumber("Price").doubleValue(), po.getParseFile("Image") != null ? po.getParseFile("Image").getUrl() : "", po.getString("Category"), po.getString("Brand")));
+                }
+                processAndGroupProducts(allProducts);
+            } else {
+                Toast.makeText(this, "Failed to load products.", Toast.LENGTH_SHORT).show();
+                Log.e("ParseError", "Error loading all products: " + e.getMessage());
+            }
+        });
+    }
+
+    private void processAndGroupProducts(List<Product> allProducts) {
+        groupedProducts = new HashMap<>();
+        for (Product product : allProducts) {
+            String brand = product.getBrand() != null ? product.getBrand() : "Unbranded";
+            String category = product.getCategory() != null ? product.getCategory() : "Uncategorized";
+            groupedProducts.computeIfAbsent(brand, k -> new HashMap<>())
+                    .computeIfAbsent(category, k -> new ArrayList<>())
+                    .add(product);
+        }
+        updateCategoryChipsForBrand(selectedBrand);
+    }
+
+    private void updateCategoryChipsForBrand(String brand) {
+        categoryChipGroup.removeAllViews();
+        Map<String, List<Product>> categoriesForBrand = groupedProducts.get(brand);
+        if (categoriesForBrand == null || categoriesForBrand.isEmpty()) {
+            updateProductGrid(null);
+            return;
+        }
+
+        List<String> sortedCategories = new ArrayList<>(categoriesForBrand.keySet());
+        Collections.sort(sortedCategories);
+
+        for (String categoryName : sortedCategories) {
+            Chip chip = (Chip) getLayoutInflater().inflate(R.layout.item_category_chip, categoryChipGroup, false);
+            chip.setText(categoryName);
+            categoryChipGroup.addView(chip);
+        }
+
+        categoryChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            Chip selectedChip = group.findViewById(checkedId);
+            updateProductGrid(selectedChip != null ? selectedChip.getText().toString() : null);
+        });
+
+        if (categoryChipGroup.getChildCount() > 0) {
+            ((Chip) categoryChipGroup.getChildAt(0)).setChecked(true);
+        }
+    }
+
+    private void updateProductGrid(@Nullable String category) {
+        displayList.clear();
+        if (category != null && groupedProducts.containsKey(selectedBrand)) {
+            Map<String, List<Product>> categoriesMap = groupedProducts.get(selectedBrand);
+            if (categoriesMap != null && categoriesMap.containsKey(category)) {
+                // Since this is the Catalogue Builder, we add the Category Header first
+                displayList.add(new CategoryHeader(category));
+                displayList.addAll(categoriesMap.get(category));
+            }
+        }
+        // This is a simplified logic. A full implementation would rebuild the whole
+        // displayList with Brand and all Category headers for the selected brand.
+        // For simplicity, we'll just show one category at a time.
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onProductSelected(Product product, boolean isSelected) {
+        if (isSelected) {
+            selectedProducts.add(product);
+        } else {
+            selectedProducts.remove(product);
+        }
+        doneButton.setEnabled(!selectedProducts.isEmpty());
+        doneButton.setText(selectedProducts.isEmpty() ? "Done" : "Done (" + selectedProducts.size() + ")");
+    }
+
+}

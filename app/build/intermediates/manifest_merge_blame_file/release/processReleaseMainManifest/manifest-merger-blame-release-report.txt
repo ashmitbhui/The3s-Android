@@ -1,0 +1,229 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="in.appoholics.the3s"
+4    android:versionCode="50"
+5    android:versionName="3.1.1" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="25"
+9        android:targetSdkVersion="36" />
+10
+11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+11-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:5:5-79
+11-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:5:22-76
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:6:5-67
+12-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+13-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:7:5-81
+13-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:7:22-78
+14
+15    <permission
+15-->[androidx.core:core:1.13.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/1d4fd9e377f4db2aa594af9b48544e05/transformed/core-1.13.0/AndroidManifest.xml:22:5-24:47
+16        android:name="in.appoholics.the3s.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+16-->[androidx.core:core:1.13.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/1d4fd9e377f4db2aa594af9b48544e05/transformed/core-1.13.0/AndroidManifest.xml:23:9-81
+17        android:protectionLevel="signature" />
+17-->[androidx.core:core:1.13.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/1d4fd9e377f4db2aa594af9b48544e05/transformed/core-1.13.0/AndroidManifest.xml:24:9-44
+18
+19    <uses-permission android:name="in.appoholics.the3s.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+19-->[androidx.core:core:1.13.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/1d4fd9e377f4db2aa594af9b48544e05/transformed/core-1.13.0/AndroidManifest.xml:26:5-97
+19-->[androidx.core:core:1.13.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/1d4fd9e377f4db2aa594af9b48544e05/transformed/core-1.13.0/AndroidManifest.xml:26:22-94
+20
+21    <application
+21-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:9:5-70:19
+22        android:name="in.appoholics.the3s.App"
+22-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:10:9-28
+23        android:allowBackup="true"
+23-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:11:9-35
+24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+24-->[androidx.core:core:1.13.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/1d4fd9e377f4db2aa594af9b48544e05/transformed/core-1.13.0/AndroidManifest.xml:28:18-86
+25        android:dataExtractionRules="@xml/data_extraction_rules"
+25-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:12:9-65
+26        android:extractNativeLibs="false"
+27        android:fullBackupContent="@xml/backup_rules"
+27-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:13:9-54
+28        android:icon="@mipmap/ic_launcher"
+28-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:14:9-43
+29        android:label="@string/app_name"
+29-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:15:9-41
+30        android:roundIcon="@mipmap/ic_launcher_round"
+30-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:16:9-54
+31        android:supportsRtl="true"
+31-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:17:9-35
+32        android:theme="@style/Theme.The3S"
+32-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:18:9-43
+33        android:usesCleartextTraffic="true" >
+33-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:19:9-44
+34        <activity
+34-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:20:9-22:40
+35            android:name="in.appoholics.the3s.CatalogueReview"
+35-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:21:13-44
+36            android:exported="false" />
+36-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:22:13-37
+37        <activity
+37-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:23:9-25:40
+38            android:name="in.appoholics.the3s.CatalogueBuilder"
+38-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:24:13-45
+39            android:exported="false" />
+39-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:25:13-37
+40        <activity
+40-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:26:9-28:40
+41            android:name="in.appoholics.the3s.Test"
+41-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:27:13-33
+42            android:exported="false" />
+42-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:28:13-37
+43        <activity
+43-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:29:9-31:40
+44            android:name="in.appoholics.the3s.ProductDetail"
+44-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:30:13-42
+45            android:exported="false" />
+45-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:31:13-37
+46        <activity
+46-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:32:9-40:20
+47            android:name="in.appoholics.the3s.SplashScreen"
+47-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:33:13-41
+48            android:exported="true" >
+48-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:34:13-36
+49            <intent-filter>
+49-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:35:13-39:29
+50                <action android:name="android.intent.action.MAIN" />
+50-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:36:17-69
+50-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:36:25-66
+51
+52                <category android:name="android.intent.category.LAUNCHER" />
+52-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:38:17-77
+52-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:38:27-74
+53            </intent-filter>
+54        </activity>
+55        <activity
+55-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:41:9-43:40
+56            android:name="in.appoholics.the3s.CategoryDetail"
+56-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:42:13-43
+57            android:exported="false" />
+57-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:43:13-37
+58        <activity
+58-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:44:9-46:40
+59            android:name="in.appoholics.the3s.HomeFrame"
+59-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:45:13-38
+60            android:exported="false" />
+60-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:46:13-37
+61        <activity
+61-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:47:9-49:39
+62            android:name="in.appoholics.the3s.MainActivity"
+62-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:48:13-41
+63            android:exported="true" />
+63-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:49:13-36
+64
+65        <meta-data
+65-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:51:9-53:59
+66            android:name="com.parse.SERVER_URL"
+66-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:52:13-48
+67            android:value="@string/back4app_server_url" />
+67-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:53:13-56
+68        <meta-data
+68-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:54:9-56:55
+69            android:name="com.parse.APPLICATION_ID"
+69-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:55:13-52
+70            android:value="@string/back4app_app_id" />
+70-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:56:13-52
+71        <meta-data
+71-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:57:9-59:59
+72            android:name="com.parse.CLIENT_KEY"
+72-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:58:13-48
+73            android:value="@string/back4app_client_key" />
+73-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:59:13-56
+74
+75        <provider
+76            android:name="androidx.core.content.FileProvider"
+76-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:62:13-62
+77            android:authorities="in.appoholics.the3s.fileprovider"
+77-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:63:13-64
+78            android:exported="false"
+78-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:64:13-37
+79            android:grantUriPermissions="true" >
+79-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:65:13-47
+80            <meta-data
+80-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:66:13-68:54
+81                android:name="android.support.FILE_PROVIDER_PATHS"
+81-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:67:17-67
+82                android:resource="@xml/file_paths" />
+82-->/Users/ashmitbhui/AndroidStudioProjects/The3S/app/src/main/AndroidManifest.xml:68:17-51
+83        </provider>
+84
+85        <service
+85-->[androidx.room:room-runtime:2.6.1] /Users/ashmitbhui/.gradle/caches/8.13/transforms/27bdeeb4aa7c7d288454c3a108d3558c/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+86            android:name="androidx.room.MultiInstanceInvalidationService"
+86-->[androidx.room:room-runtime:2.6.1] /Users/ashmitbhui/.gradle/caches/8.13/transforms/27bdeeb4aa7c7d288454c3a108d3558c/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+87            android:directBootAware="true"
+87-->[androidx.room:room-runtime:2.6.1] /Users/ashmitbhui/.gradle/caches/8.13/transforms/27bdeeb4aa7c7d288454c3a108d3558c/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+88            android:exported="false" />
+88-->[androidx.room:room-runtime:2.6.1] /Users/ashmitbhui/.gradle/caches/8.13/transforms/27bdeeb4aa7c7d288454c3a108d3558c/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+89
+90        <provider
+90-->[androidx.emoji2:emoji2:1.3.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/eb9fb971c3224a9b8b4b4cfcae2baa80/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+91            android:name="androidx.startup.InitializationProvider"
+91-->[androidx.emoji2:emoji2:1.3.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/eb9fb971c3224a9b8b4b4cfcae2baa80/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+92            android:authorities="in.appoholics.the3s.androidx-startup"
+92-->[androidx.emoji2:emoji2:1.3.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/eb9fb971c3224a9b8b4b4cfcae2baa80/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+93            android:exported="false" >
+93-->[androidx.emoji2:emoji2:1.3.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/eb9fb971c3224a9b8b4b4cfcae2baa80/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+94            <meta-data
+94-->[androidx.emoji2:emoji2:1.3.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/eb9fb971c3224a9b8b4b4cfcae2baa80/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+95                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+95-->[androidx.emoji2:emoji2:1.3.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/eb9fb971c3224a9b8b4b4cfcae2baa80/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+96                android:value="androidx.startup" />
+96-->[androidx.emoji2:emoji2:1.3.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/eb9fb971c3224a9b8b4b4cfcae2baa80/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+97            <meta-data
+97-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/ashmitbhui/.gradle/caches/8.13/transforms/e7efa0c3fdb27853f1d993678c98c6b9/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+98                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+98-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/ashmitbhui/.gradle/caches/8.13/transforms/e7efa0c3fdb27853f1d993678c98c6b9/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+99                android:value="androidx.startup" />
+99-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/ashmitbhui/.gradle/caches/8.13/transforms/e7efa0c3fdb27853f1d993678c98c6b9/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+100            <meta-data
+100-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+101                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+101-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+102                android:value="androidx.startup" />
+102-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
+103        </provider>
+104
+105        <receiver
+105-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+106            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+106-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
+107            android:directBootAware="false"
+107-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
+108            android:enabled="true"
+108-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
+109            android:exported="true"
+109-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
+110            android:permission="android.permission.DUMP" >
+110-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
+111            <intent-filter>
+111-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
+112                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+112-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
+112-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
+113            </intent-filter>
+114            <intent-filter>
+114-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
+115                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+115-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
+115-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
+116            </intent-filter>
+117            <intent-filter>
+117-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
+118                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+118-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
+118-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
+119            </intent-filter>
+120            <intent-filter>
+120-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
+121                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+121-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
+121-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/ashmitbhui/.gradle/caches/8.13/transforms/4355632b3e65460c809f473d77f04699/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
+122            </intent-filter>
+123        </receiver>
+124    </application>
+125
+126</manifest>

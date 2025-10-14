@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">The 3S</string>
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <string name="back4app_app_id">TtiCJM3I7ut84uRuIPSJb6tpfVGE8vrhuEJzWDxp</string>
+    <string name="back4app_client_key">fKGiMTFCQylmYmLfncdPo20CcKAA2ewqLIFdhCga</string>
+
+    <string name="table_clocks_text">Table Clocks</string>
+    <string name="photo_frames_text">Photo Frames</string>
+    <string name="wall_clocks_text">Wall Clocks</string>
+    <string name="trophyverse_text">Trophyverse</string>
+    <string name="wrist_watches_text">Wrist Watches</string>
+    <string name="select_category_text">Select a Category</string>
+    <string name="create_catalogue_text">Create your Catalogue</string>
+    <string name="logout_text">Logout</string>
+    <string name="home_text">Home</string>
+    <string name="search_text">Search</string>
+    <string name="favourite_text">Favourite</string>
+    <string name="docs_text">Vidoes &amp; PDF</string>
+
+    <string name="product_image_description">Image of the product</string>
+    <string name="mark_as_favorite">Mark as favorite</string>
+
+
+</resources>
