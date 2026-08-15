@@ -13,3 +13,12 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# local import data (photos + filled sheets)
+tools/import/images/
+tools/import/icons/
+tools/import/products.csv
+tools/import/categories.csv
+tools/import/backups/
+tools/import/review/
+tools/import/*.log

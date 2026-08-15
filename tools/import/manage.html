@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manage product images</title>
+<style>
+  :root { --ink:#171A23; --muted:#6B7A71; --line:#E2E8E4; --bg:#F4F7F5;
+          --green:#0B3D2E; --red:#9B1C1C; --redbg:#FDE7E7; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--green); color:#fff; padding:16px 24px; }
+  header.top h1 { margin:0; font-size:19px; font-weight:600; }
+  .stats { margin-top:6px; font-size:13px; color:#C9DED5; }
+  .filters { display:flex; flex-wrap:wrap; gap:8px; padding:14px 24px; background:#fff;
+    border-bottom:1px solid var(--line); position:sticky; top:74px; z-index:9; }
+  .filters button { font:inherit; font-size:13px; padding:7px 14px; border-radius:18px;
+    border:1px solid var(--line); background:#fff; cursor:pointer; color:var(--ink); }
+  .filters button.on { background:var(--green); color:#fff; border-color:var(--green); }
+  main { padding:20px 24px 70px; display:flex; flex-direction:column; gap:14px; }
+  .product { background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; }
+  .product > header { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+  .num { font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .product h3 { margin:0; font-size:16px; font-weight:600; }
+  .meta { font-size:13px; color:var(--muted); }
+  .status { font-size:12px; padding:3px 9px; border-radius:10px; }
+  .status.busy { background:#E8EEF9; color:#2A4A8B; }
+  .status.ok { background:#E3F2EA; color:#0B3D2E; }
+  .status.err { background:var(--redbg); color:var(--red); }
+  .strip { display:flex; gap:10px; overflow-x:auto; padding-bottom:4px; }
+  .shot { position:relative; flex:0 0 auto; width:150px; }
+  .shot img { width:150px; height:150px; object-fit:contain; background:#fff;
+    border:1px solid var(--line); border-radius:10px; display:block; }
+  .shot.cover img { border-color:var(--green); border-width:2px; }
+  .shot.gone { opacity:.35; }
+  .tags { margin-top:5px; display:flex; gap:4px; flex-wrap:wrap; }
+  .b { font-size:10px; font-weight:600; padding:2px 6px; border-radius:6px; background:#EEF2EF; color:var(--muted); }
+  .b.cover { background:var(--green); color:#fff; }
+  .acts { position:absolute; inset:0; display:flex; flex-direction:column; gap:6px;
+    align-items:center; justify-content:center; opacity:0; transition:opacity .12s; }
+  .shot:hover .acts { opacity:1; }
+  .acts button { font:600 11px/1 inherit; padding:7px 11px; border-radius:14px; border:0; cursor:pointer; }
+  .acts .mk { background:rgba(11,61,46,.94); color:#fff; }
+  .acts .rm { background:rgba(155,28,28,.94); color:#fff; }
+  .shot.cover .mk { display:none; }
+  .empty { padding:40px; text-align:center; color:var(--muted); }
+  .bar { position:fixed; right:20px; bottom:20px; background:#fff; border:1px solid var(--line);
+    border-radius:30px; padding:11px 18px; box-shadow:0 6px 24px rgba(0,0,0,.14);
+    font-size:13px; color:var(--muted); z-index:20; }
+</style></head><body>
+<header class="top">
+  <a href="../" style="color:#9FC7B5;text-decoration:none;font-size:12px">&larr; all brands</a>
+  <h1 id="title">Manage product images</h1>
+  <div class="stats" id="stats">loading…</div>
+</header>
+<div class="filters" id="filters"></div>
+<main id="list"><div class="empty">loading products…</div></main>
+<div class="bar" id="bar">Hover an image to set it as cover or remove it</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const BRAND = params.get('brand');
+const SERIES = params.get('series');
+let DATA = [];
+
+const listEl = document.getElementById('list');
+const barEl = document.getElementById('bar');
+
+function setStatus(card, text, cls) {
+  let el = card.querySelector('.status');
+  if (!el) { el = document.createElement('span'); el.className = 'status';
+             card.querySelector('header').appendChild(el); }
+  el.className = 'status ' + cls; el.textContent = text;
+}
+
+function render() {
+  document.getElementById('title').textContent = BRAND + ' ' + SERIES + ' — manage images';
+  const withCover = DATA.filter(p => p.cover).length;
+  const slides = DATA.reduce((n, p) => n + p.slides.length, 0);
+  document.getElementById('stats').textContent =
+    DATA.length + ' products · ' + withCover + ' with a cover · ' + slides + ' slides';
+
+  listEl.innerHTML = DATA.map(p => {
+    const shots = [];
+    if (p.cover) shots.push({url: p.cover, cover: true, id: null, name: p.coverName});
+    p.slides.forEach(s => shots.push({url: s.url, cover: false, id: s.id, name: s.name}));
+    const strip = shots.map(s => `
+      <figure class="shot ${s.cover ? 'cover' : ''}" data-id="${s.id || ''}" data-url="${s.url}">
+        <img src="${s.url}" loading="lazy" alt="">
+        <div class="acts">
+          ${s.cover ? '' : '<button class="mk" type="button">Make cover</button>'}
+          ${s.cover ? '' : '<button class="rm" type="button">Remove</button>'}
+        </div>
+        <div class="tags"><b class="b ${s.cover ? 'cover' : ''}">${s.cover ? 'cover' : 'slide'}</b></div>
+      </figure>`).join('');
+    return `<article class="product" data-id="${p.id}" data-name="${p.name.replace(/"/g, '&quot;')}">
+      <header><span class="num">#${p.order ?? ''}</span><h3>${p.name}</h3>
+        <span class="meta">${p.category || ''} · ₹${p.price ?? ''} · ${shots.length} image${shots.length === 1 ? '' : 's'}</span>
+      </header><div class="strip">${strip}</div></article>`;
+  }).join('') || '<div class="empty">no products</div>';
+
+  listEl.querySelectorAll('.product').forEach(card => {
+    card.querySelectorAll('.mk').forEach(b =>
+      b.addEventListener('click', () => act(card, b.closest('.shot'), 'promote')));
+    card.querySelectorAll('.rm').forEach(b =>
+      b.addEventListener('click', () => act(card, b.closest('.shot'), 'remove')));
+  });
+}
+
+async function act(card, shot, what) {
+  if (shot.dataset.busy) return;               // ignore double-clicks
+  shot.dataset.busy = '1';
+  shot.querySelectorAll('button').forEach(b => b.disabled = true);
+  const product = card.dataset.name;
+  const id = card.dataset.id;
+  setStatus(card, what === 'promote' ? 'setting cover…' : 'removing…', 'busy');
+  try {
+    const res = await fetch('/api/' + what, {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({brand: BRAND, series: SERIES, product, id,
+                            mediaId: shot.dataset.id, url: shot.dataset.url})
+    });
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error || ('HTTP ' + res.status));
+    const idx = DATA.findIndex(p => p.id === id);
+    if (idx >= 0) DATA[idx] = data.product;
+    render();
+    barEl.textContent = (what === 'promote' ? 'Cover updated — ' : 'Image removed — ') + product;
+  } catch (err) {
+    setStatus(card, 'failed: ' + err.message, 'err');
+    barEl.textContent = 'Action failed — ' + err.message;
+    shot.removeAttribute('data-busy');
+    shot.querySelectorAll('button').forEach(b => b.disabled = false);
+  }
+}
+
+async function load() {
+  const res = await fetch(`/api/list?brand=${encodeURIComponent(BRAND)}&series=${encodeURIComponent(SERIES)}`);
+  const data = await res.json();
+  DATA = data.products || [];
+  render();
+  const cats = [...new Set(DATA.map(p => p.category).filter(Boolean))].sort();
+  document.getElementById('filters').innerHTML =
+    ['<button data-f="all" class="on">All</button>',
+     '<button data-f="nocover">Missing cover</button>',
+     '<button data-f="noslides">No slides</button>',
+     ...cats.map(c => `<button data-f="cat:${c}">${c}</button>`)].join('');
+  document.querySelectorAll('#filters button').forEach(b =>
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#filters button').forEach(x => x.classList.toggle('on', x === b));
+      const f = b.dataset.f;
+      listEl.querySelectorAll('.product').forEach(el => {
+        const p = DATA.find(x => x.id === el.dataset.id) || {};
+        let show = true;
+        if (f === 'nocover') show = !p.cover;
+        else if (f === 'noslides') show = !(p.slides || []).length;
+        else if (f.startsWith('cat:')) show = p.category === f.slice(4);
+        el.style.display = show ? '' : 'none';
+      });
+    }));
+}
+load();
+</script>
+</body></html>

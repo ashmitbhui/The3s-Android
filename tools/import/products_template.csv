@@ -1,0 +1,4 @@
+Name,Brand,Category,Price,Detail,Serial,MasterSerial,Order,MOQ,MasterPacking,isNew,image_file
+NYU,3S,Table Clocks,110,"Size: 6"" x 6""
+Dial Size: 5.5"" x 5.5""
+Gross Weight: 310 gms",TC3,3,3,100,50,True,nyu.jpg
