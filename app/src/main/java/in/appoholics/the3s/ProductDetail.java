@@ -110,8 +110,11 @@ public class ProductDetail extends AppCompatActivity {
         whatsappButton.setOnClickListener(v -> {
             String productName = nameTextView.getText().toString();
             String message = "Hello! I'm interested in: " + productName;
+            // Verbose enquiries go to the Verbose line; 3S and TrophyVerse to the 3S line.
+            String brand = currentProduct != null ? currentProduct.getString("Brand") : null;
+            String number = "verbose".equalsIgnoreCase(brand) ? "917428942791" : "919312249445";
             android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
-            intent.setData(android.net.Uri.parse("https://wa.me/919312249445?text=" + android.net.Uri.encode(message)));
+            intent.setData(android.net.Uri.parse("https://wa.me/" + number + "?text=" + android.net.Uri.encode(message)));
             startActivity(intent);
         });
     }
