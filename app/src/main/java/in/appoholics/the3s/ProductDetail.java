@@ -247,10 +247,9 @@ public class ProductDetail extends AppCompatActivity {
     /** Every image of the product (cover + slides) plus the full details; dealers pick pricing. */
     private void shareProduct() {
         if (currentProduct == null) return;
-        ArrayList<String> images = new ArrayList<>();
-        for (MediaItem m : mediaItems) {
-            if ("image".equalsIgnoreCase(m.getType())) images.add(m.getUrl());
-        }
+        ArrayList<String> images = new ArrayList<>();   // cover only
+        ParseFile cover = currentProduct.getParseFile("Image");
+        if (cover != null && cover.getUrl() != null) images.add(cover.getUrl());
         ProductShare.Item item = new ProductShare.Item(
                 currentProduct.getString("Name"),
                 DealerPricing.apply(currentProduct.getNumber("Price")),

@@ -143,18 +143,13 @@ public final class ProductShare {
         }
     }
 
-    /** Name, price (per pricing), full detail, MOQ / master packing when the detail lacks them. */
+    /** Name, price (per pricing) and the full detail. */
     static String shareText(Item item, Pricing pricing) {
         StringBuilder sb = new StringBuilder(item.name);
         Double p = pricing.apply(item.price);
         if (p != null) sb.append("\nPrice: ").append(formatPrice(p));
         String d = item.detail == null ? "" : item.detail.trim();
         if (!d.isEmpty()) sb.append("\n").append(d);
-        String low = d.toLowerCase(Locale.ROOT);
-        if (item.moq != null && item.moq.doubleValue() > 0 && !low.contains("minimum"))
-            sb.append("\nMinimum order: ").append(item.moq.intValue()).append(" pcs");
-        if (item.masterPacking != null && item.masterPacking.doubleValue() > 0 && !low.contains("master pack"))
-            sb.append("\nMaster packing: ").append(item.masterPacking.intValue()).append(" pcs");
         return sb.toString();
     }
 
