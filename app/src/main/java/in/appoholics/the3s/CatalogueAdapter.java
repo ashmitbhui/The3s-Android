@@ -112,16 +112,31 @@ public class CatalogueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     // --- ViewHolder for Products ---
     class ProductViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
-        TextView name;
+        TextView name, price, detail;
         CheckBox checkBox;
         ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.product_image);
             name = itemView.findViewById(R.id.product_name);
+            price = itemView.findViewById(R.id.product_price);
+            detail = itemView.findViewById(R.id.product_detail);
             checkBox = itemView.findViewById(R.id.product_checkbox);
         }
         void bind(Product product) {
             name.setText(product.getName());
+            if (UserStatus.isLoggedIn()) {   // dealer prices are login-only
+                price.setText(String.format(java.util.Locale.getDefault(), "₹%,.0f", product.getPrice()));
+                price.setVisibility(View.VISIBLE);
+            } else {
+                price.setVisibility(View.GONE);
+            }
+            String detailText = product.getDetail();
+            if (detailText == null || detailText.trim().isEmpty()) {
+                detail.setVisibility(View.GONE);
+            } else {
+                detail.setVisibility(View.VISIBLE);
+                detail.setText(detailText);
+            }
             Glide.with(context).load(product.getImageUrl()).into(image);
 
             checkBox.setOnCheckedChangeListener(null);

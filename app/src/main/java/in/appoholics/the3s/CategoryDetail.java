@@ -79,12 +79,14 @@ public class CategoryDetail extends AppCompatActivity implements ProductAdapter.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_detail);
+        EdgeToEdgeHelper.apply(this, android.R.id.content, R.id.category_detail_content, R.id.share_selected_button);
 
         initializeViews();
         setupRecyclerView();
 
         String categoryName = getIntent().getStringExtra("CATEGORY_NAME");
         String brandName = getIntent().getStringExtra("BRAND_NAME");
+        applyBrandColour(brandName);
 
         if (categoryName != null && !categoryName.isEmpty()) {
             categoryHeader.setText(categoryName);
@@ -93,6 +95,25 @@ public class CategoryDetail extends AppCompatActivity implements ProductAdapter.
             Toast.makeText(this, "Category not found", Toast.LENGTH_SHORT).show();
             finish();
         }
+    }
+
+    /**
+     * Colours the header (and the status bar area above it) in the brand colour
+     * of the world this category belongs to.
+     */
+    private void applyBrandColour(String brandName) {
+        int colour = 0xFF16604A; // 3S default
+        if ("Trophyverse".equals(brandName)) {
+            colour = 0xFF5E0021;
+        } else if ("Verbose".equals(brandName)) {
+            colour = 0xFF0032D2;
+        }
+        findViewById(R.id.header_bar).setBackgroundColor(colour);
+        // API 35+ ignores setStatusBarColor; the content container paints the inset strip instead
+        findViewById(R.id.category_detail_content).setBackgroundColor(colour);
+        getWindow().setStatusBarColor(colour);
+        androidx.core.view.WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView())
+                .setAppearanceLightStatusBars(false);
     }
 
     @Override
@@ -152,11 +173,12 @@ public class CategoryDetail extends AppCompatActivity implements ProductAdapter.
     }
 
     private void updateLoginButtonState() {
-        if (ParseUser.getCurrentUser() != null) {
-            loginButton.setText("Logout");
-        } else {
-            loginButton.setText("Login");
-        }
+        boolean loggedIn = ParseUser.getCurrentUser() != null;
+        loginButton.setText(loggedIn ? "Logout" : "Login");
+        // price sort / price-range filter only make sense once prices are visible
+        View sortFilterRow = findViewById(R.id.sort_filter_row);
+        if (sortFilterRow != null) sortFilterRow.setVisibility(loggedIn ? View.VISIBLE : View.GONE);
+        if (productAdapter != null) productAdapter.notifyDataSetChanged();
     }
 
     private void setupRecyclerView() {

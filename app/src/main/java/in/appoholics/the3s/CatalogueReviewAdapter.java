@@ -43,9 +43,14 @@ public class CatalogueReviewAdapter extends RecyclerView.Adapter<CatalogueReview
         Product product = productList.get(position);
         holder.name.setText(product.getName());
 
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
-        currencyFormat.setMaximumFractionDigits(0);
-        holder.price.setText(currencyFormat.format(product.getPrice()));
+        if (UserStatus.isLoggedIn()) {   // dealer prices are login-only
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+            currencyFormat.setMaximumFractionDigits(0);
+            holder.price.setText(currencyFormat.format(product.getPrice()));
+            holder.price.setVisibility(View.VISIBLE);
+        } else {
+            holder.price.setVisibility(View.GONE);
+        }
 
         Glide.with(context).load(product.getImageUrl()).into(holder.image);
 
