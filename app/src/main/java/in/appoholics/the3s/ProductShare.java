@@ -201,7 +201,35 @@ public final class ProductShare {
             File dir = new File(activity.getCacheDir(), "images");
             if (!dir.exists()) dir.mkdirs();
 
+            boolean cards = items.size() > 1;   // several products: one card image per product
             for (Item item : items) {
+                if (cards) {
+                    // Photo + this product's own details in one image, so every picture
+                    // in WhatsApp carries the right text (only one caption per batch otherwise).
+                    android.graphics.Bitmap photo = null;
+                    String url = item.imageUrls.isEmpty() ? null : item.imageUrls.get(0);
+                    if (url != null && !url.isEmpty()) {
+                        try {
+                            photo = Glide.with(activity).asBitmap().load(url).submit(1000, 1000).get();
+                        } catch (Exception e) {
+                            Log.e("ProductShare", "Could not load " + url, e);
+                        }
+                    }
+                    Double p = pricing.apply(item.price);
+                    android.graphics.Bitmap card = ShareCard.render(photo, item.name,
+                            p == null ? null : formatPrice(p), detailForSharing(item.detail));
+                    try {
+                        File dest = new File(dir, "share_card_" + (++n) + ".jpg");
+                        try (OutputStream out = new FileOutputStream(dest)) {
+                            card.compress(android.graphics.Bitmap.CompressFormat.JPEG, 90, out);
+                        }
+                        uris.add(FileProvider.getUriForFile(activity,
+                                activity.getPackageName() + ".fileprovider", dest));
+                    } catch (Exception e) {
+                        Log.e("ProductShare", "Could not write card", e);
+                    }
+                    continue;
+                }
                 if (text.length() > 0) text.append("\n\n");
                 text.append(shareText(item, pricing));
                 for (String url : item.imageUrls) {
@@ -230,7 +258,7 @@ public final class ProductShare {
                     intent = new Intent(Intent.ACTION_SEND_MULTIPLE).setType("image/*")
                             .putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
                 }
-                intent.putExtra(Intent.EXTRA_TEXT, text.toString());
+                if (text.length() > 0) intent.putExtra(Intent.EXTRA_TEXT, text.toString());
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 try {
                     activity.startActivity(Intent.createChooser(intent, "Share via"));
