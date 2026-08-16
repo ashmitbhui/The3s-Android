@@ -109,7 +109,9 @@ public class ProductDetail extends AppCompatActivity {
         MaterialButton whatsappButton = findViewById(R.id.whatsapp_enquiry_button);
         whatsappButton.setOnClickListener(v -> {
             String productName = nameTextView.getText().toString();
-            String message = "Hello! I'm interested in: " + productName;
+            String category = currentProduct != null ? currentProduct.getString("Category") : null;
+            String message = "Hello! I'm interested in: " + productName
+                    + (category != null && !category.trim().isEmpty() ? " (" + category.trim() + ")" : "");
             // Verbose enquiries go to the Verbose line; 3S and TrophyVerse to the 3S line.
             String brand = currentProduct != null ? currentProduct.getString("Brand") : null;
             String number = "verbose".equalsIgnoreCase(brand) ? "917428942791" : "919312249445";
