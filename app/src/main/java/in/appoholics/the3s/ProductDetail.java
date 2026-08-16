@@ -57,6 +57,7 @@ public class ProductDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+        EdgeToEdgeHelper.apply(this, android.R.id.content, R.id.product_detail_app_bar, R.id.product_detail_bottom_bar);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -105,6 +106,14 @@ public class ProductDetail extends AppCompatActivity {
         favoriteButton = findViewById(R.id.product_detail_favorite);
         shareButton = findViewById(R.id.share_button);
 
+        MaterialButton whatsappButton = findViewById(R.id.whatsapp_enquiry_button);
+        whatsappButton.setOnClickListener(v -> {
+            String productName = nameTextView.getText().toString();
+            String message = "Hello! I'm interested in: " + productName;
+            android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
+            intent.setData(android.net.Uri.parse("https://wa.me/919312249445?text=" + android.net.Uri.encode(message)));
+            startActivity(intent);
+        });
     }
 
     private void loadProductAndMedia(String productId) {
@@ -132,8 +141,7 @@ public class ProductDetail extends AppCompatActivity {
                     mediaItems.add(new MediaItem(mainImageFile.getUrl(), "image"));
                 }
 
-                // Setup the share button listener
-                // setupShareButtonListener(); // You can add this logic
+                shareButton.setOnClickListener(v -> shareProduct());
 
                 // Step 2: Fetch associated media from the "Media" class
 //                fetchMediaForProduct(productName, productCategory);
@@ -229,6 +237,26 @@ public class ProductDetail extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    /** Every image of the product (cover + slides) plus the full details; dealers pick pricing. */
+    private void shareProduct() {
+        if (currentProduct == null) return;
+        ArrayList<String> images = new ArrayList<>();
+        for (MediaItem m : mediaItems) {
+            if ("image".equalsIgnoreCase(m.getType())) images.add(m.getUrl());
+        }
+        Number price = currentProduct.getNumber("Price");
+        ProductShare.Item item = new ProductShare.Item(
+                currentProduct.getString("Name"),
+                price == null ? null : price.doubleValue(),
+                currentProduct.getString("Detail"),
+                currentProduct.getNumber("MOQ"),
+                currentProduct.getNumber("MasterPacking"),
+                images);
+        ArrayList<ProductShare.Item> items = new ArrayList<>();
+        items.add(item);
+        ProductShare.share(this, items);
     }
 
     private void fetchMediaForProduct(String productName, String productCategory) {

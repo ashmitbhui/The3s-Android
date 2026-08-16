@@ -310,81 +310,19 @@ public class CategoryDetail extends AppCompatActivity implements ProductAdapter.
     }
 
     private void shareSelectedProducts() {
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Preparing images for sharing...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
-        // Use an executor for background tasks to avoid freezing the UI
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(() -> {
-            // --- BACKGROUND TASK ---
-            StringBuilder shareText = new StringBuilder();
-            shareText.append("Check out these products:\n\n");
-            ArrayList<Uri> imageUris = new ArrayList<>();
-            int selectedCount = 0;
-
-            for (Product product : masterProductList) {
-                if (product.isSelected()) {
-                    selectedCount++;
-                    // 1. Build the text part
-                    shareText.append("• ")
-                            .append(product.getName())
-                            .append(": ")
-                            .append(product.getDetail())
-                            .append("\n\n");
-
-                    // 2. Download, save, and get the URI for the image
-                    try {
-                        // Use Glide to download the file synchronously on this background thread
-                        File downloadedFile = Glide.with(CategoryDetail.this)
-                                .asFile()
-                                .load(product.getImageUrl())
-                                .submit()
-                                .get();
-
-                        // Define the destination directory within the app's cache
-                        File destDir = new File(getCacheDir(), "images");
-                        if (!destDir.exists()) {
-                            destDir.mkdirs();
-                        }
-                        File destFile = new File(destDir, "share_image_" + selectedCount + ".jpg");
-
-                        // Copy the downloaded file to our shareable directory
-                        copy(downloadedFile, destFile);
-
-                        // Get a content URI using the FileProvider for sharing
-                        Uri uri = FileProvider.getUriForFile(
-                                CategoryDetail.this,
-                                getApplicationContext().getPackageName() + ".fileprovider",
-                                destFile
-                        );
-                        imageUris.add(uri);
-
-                    } catch (Exception e) {
-                        Log.e("ShareError", "Error preparing image for sharing: " + product.getImageUrl(), e);
-                    }
-                }
-            }
-
-            // --- UI TASK (after background work is done) ---
-            runOnUiThread(() -> {
-                progressDialog.dismiss();
-                if (imageUris.isEmpty()) {
-                    Toast.makeText(this, "Could not prepare images for sharing.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // 3. Create and launch the share intent for multiple images
-                Intent shareIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                shareIntent.setType("image/*");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, shareText.toString());
-                shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
-                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-                startActivity(Intent.createChooser(shareIntent, "Share via"));
-            });
-        });
+        ArrayList<ProductShare.Item> items = new ArrayList<>();
+        for (Product product : masterProductList) {
+            if (!product.isSelected()) continue;
+            ArrayList<String> images = new ArrayList<>();
+            if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) images.add(product.getImageUrl());
+            items.add(new ProductShare.Item(product.getName(), product.getPrice(), product.getDetail(),
+                    null, null, images));
+        }
+        if (items.isEmpty()) {
+            Toast.makeText(this, "Select at least one product", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        ProductShare.share(this, items);
     }
 
     // Helper method to copy files
