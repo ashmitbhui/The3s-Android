@@ -143,14 +143,44 @@ public final class ProductShare {
         }
     }
 
-    /** Name, price (per pricing) and the full detail. */
+    /** Name, price (per pricing) and the detail without trade-only lines. */
     static String shareText(Item item, Pricing pricing) {
         StringBuilder sb = new StringBuilder(item.name);
         Double p = pricing.apply(item.price);
         if (p != null) sb.append("\nPrice: ").append(formatPrice(p));
-        String d = item.detail == null ? "" : item.detail.trim();
+        String d = detailForSharing(item.detail);
         if (!d.isEmpty()) sb.append("\n").append(d);
         return sb.toString();
+    }
+
+    private static final String[] TRADE_ONLY = {
+            "minimum qty", "min qty", "min. qty", "minimum quantity", "moq", "master pack"};
+
+    /**
+     * Detail text without minimum-qty / MOQ / master-packing lines. Details are
+     * newline-separated (3S) or "; "-separated (Verbose); both are handled.
+     */
+    static String detailForSharing(@Nullable String detail) {
+        if (detail == null) return "";
+        StringBuilder out = new StringBuilder();
+        for (String line : detail.split("\\r?\\n")) {
+            StringBuilder kept = new StringBuilder();
+            for (String part : line.split(";")) {
+                String t = part.trim();
+                if (t.isEmpty()) continue;
+                String low = t.toLowerCase(Locale.ROOT);
+                boolean trade = false;
+                for (String k : TRADE_ONLY) if (low.contains(k)) { trade = true; break; }
+                if (trade) continue;
+                if (kept.length() > 0) kept.append("; ");
+                kept.append(t);
+            }
+            if (kept.length() > 0) {
+                if (out.length() > 0) out.append("\n");
+                out.append(kept);
+            }
+        }
+        return out.toString().trim();
     }
 
     static String formatPrice(double p) {
