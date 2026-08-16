@@ -177,7 +177,7 @@ public class ProductDetail extends AppCompatActivity {
             // If logged in, show the price
             NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
             currencyFormat.setMaximumFractionDigits(0);
-            priceTextView.setText(currencyFormat.format(product.getNumber("Price")));
+            priceTextView.setText(currencyFormat.format(DealerPricing.apply(product.getNumber("Price"))));
             priceTextView.setVisibility(View.VISIBLE);
         } else {
             // If not logged in, hide the price
@@ -224,7 +224,7 @@ public class ProductDetail extends AppCompatActivity {
                             productId,
                             currentProduct.getString("Name"),
                             currentProduct.getString("Detail"),
-                            String.valueOf(currentProduct.getNumber("Price")),
+                            String.valueOf(DealerPricing.apply(currentProduct.getNumber("Price"))),
                             imageFile != null ? imageFile.getUrl() : "", currentProduct.getString("Category"), // ✨ ADDED
                             currentProduct.getString("Brand")
 
@@ -246,10 +246,9 @@ public class ProductDetail extends AppCompatActivity {
         for (MediaItem m : mediaItems) {
             if ("image".equalsIgnoreCase(m.getType())) images.add(m.getUrl());
         }
-        Number price = currentProduct.getNumber("Price");
         ProductShare.Item item = new ProductShare.Item(
                 currentProduct.getString("Name"),
-                price == null ? null : price.doubleValue(),
+                DealerPricing.apply(currentProduct.getNumber("Price")),
                 currentProduct.getString("Detail"),
                 currentProduct.getNumber("MOQ"),
                 currentProduct.getNumber("MasterPacking"),

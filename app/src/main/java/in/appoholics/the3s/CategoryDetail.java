@@ -215,7 +215,7 @@ public class CategoryDetail extends AppCompatActivity implements ProductAdapter.
                         String objectId = productObject.getObjectId();
                         String name = productObject.getString("Name");
                         String detail = productObject.getString("Detail");
-                        double price = productObject.getNumber("Price").doubleValue();
+                        double price = DealerPricing.apply(productObject.getNumber("Price").doubleValue());
                         String imageUrl = "";
                         ParseFile imageFile = productObject.getParseFile("Image");
                         if (imageFile != null) {

@@ -51,6 +51,7 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalogue_builder);
+        EdgeToEdgeHelper.apply(this, android.R.id.content, R.id.catalogue_builder_content, R.id.done_button_container);
 
         initializeViews();
         setupToolbar();
@@ -102,7 +103,7 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
 
     private void setupRecyclerView() {
         adapter = new CatalogueAdapter(this, displayList, selectedProducts, this);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -115,7 +116,7 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
                 switch (adapter.getItemViewType(position)) {
                     case CatalogueAdapter.TYPE_BRAND:
                     case CatalogueAdapter.TYPE_CATEGORY:
-                        return 3; // Headers span all 3 columns
+                        return 2; // Headers span both columns
                     case CatalogueAdapter.TYPE_PRODUCT:
                     default:
                         return 1; // Products take 1 column
@@ -133,6 +134,8 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
             if (isChecked) {
                 if (checkedId == R.id.button_3s) {
                     selectedBrand = "3S";
+                } else if (checkedId == R.id.button_trophyverse) {
+                    selectedBrand = "Trophyverse";
                 } else if (checkedId == R.id.button_verbose) {
                     selectedBrand = "Verbose";
                 }
@@ -155,7 +158,7 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
             if (e == null) {
                 List<Product> allProducts = new ArrayList<>();
                 for (ParseObject po : objects) {
-                    allProducts.add(new Product(po.getObjectId(), po.getString("Name"), po.getString("Detail"), po.getNumber("Price").doubleValue(), po.getParseFile("Image") != null ? po.getParseFile("Image").getUrl() : "", po.getString("Category"), po.getString("Brand")));
+                    allProducts.add(new Product(po.getObjectId(), po.getString("Name"), po.getString("Detail"), DealerPricing.apply(po.getNumber("Price").doubleValue()), po.getParseFile("Image") != null ? po.getParseFile("Image").getUrl() : "", po.getString("Category"), po.getString("Brand")));
                 }
                 processAndGroupProducts(allProducts);
             } else {

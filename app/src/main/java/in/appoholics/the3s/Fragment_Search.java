@@ -174,7 +174,7 @@ public class Fragment_Search extends Fragment implements ProductAdapter.OnProduc
                         String objectId = productObject.getObjectId();
                         String name = productObject.getString("Name");
                         String detail = productObject.getString("Detail");
-                        double price = productObject.getNumber("Price").doubleValue();
+                        double price = DealerPricing.apply(productObject.getNumber("Price").doubleValue());
                         String category = productObject.getString("Category");
                         String brand = productObject.getString("Brand");
                         String imageUrl = "";

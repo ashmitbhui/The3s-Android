@@ -10,21 +10,10 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseInstallation;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 public class HomeFrame extends AppCompatActivity {
 
@@ -32,7 +21,7 @@ public class HomeFrame extends AppCompatActivity {
     Fragment_Home home = new Fragment_Home();
     Fragment_Search search = new Fragment_Search();
     Fragment_Favourite favourite = new Fragment_Favourite();
-    Fragment_Videos videos = new Fragment_Videos();
+    Fragment_Marketing marketing = new Fragment_Marketing();
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -66,6 +55,20 @@ public class HomeFrame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_frame);
+        EdgeToEdgeHelper.apply(this, R.id.main, R.id.container, R.id.bottomNav);
+        DealerPricing.refresh();   // pick up markup changes made in the portal
+
+        // Android 13+ needs runtime consent before notifications can show
+        if (android.os.Build.VERSION.SDK_INT >= 33 &&
+                checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
+                        != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 71);
+        }
+
+        // White status bar with dark icons to blend with the light headers
+        getWindow().setStatusBarColor(android.graphics.Color.WHITE);
+        androidx.core.view.WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView())
+                .setAppearanceLightStatusBars(true);
 
 //        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 //        installation.put("User", ParseUser.getCurrentUser());
@@ -115,7 +118,7 @@ public class HomeFrame extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_fav) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, favourite).commit();
                 } else {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, videos).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, marketing).commit();
                 }
 
                 return true;
