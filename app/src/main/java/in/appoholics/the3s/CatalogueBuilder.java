@@ -39,6 +39,10 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
     private MaterialButton doneButton;
     private MaterialButtonToggleGroup brandToggleGroup;
     private ChipGroup categoryChipGroup;
+    private Chip budgetChip;
+    /** Customer budget per piece (on the dealer's price); null = no limit. */
+    private Double budgetMin = null, budgetMax = null;
+    private String currentCategory = null;
     private CatalogueAdapter adapter;
 
 
@@ -66,6 +70,9 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
         doneButton = findViewById(R.id.done_button);
         brandToggleGroup = findViewById(R.id.brand_toggle_group);
         categoryChipGroup = findViewById(R.id.category_chip_group);
+        budgetChip = findViewById(R.id.budget_chip);
+        budgetChip.setOnClickListener(v -> showBudgetDialog());
+        budgetChip.setOnCloseIconClickListener(v -> { budgetMin = null; budgetMax = null; onBudgetChanged(); });
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -208,19 +215,86 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
     }
 
     private void updateProductGrid(@Nullable String category) {
+        currentCategory = category;
         displayList.clear();
         if (category != null && groupedProducts.containsKey(selectedBrand)) {
             Map<String, List<Product>> categoriesMap = groupedProducts.get(selectedBrand);
             if (categoriesMap != null && categoriesMap.containsKey(category)) {
                 // Since this is the Catalogue Builder, we add the Category Header first
                 displayList.add(new CategoryHeader(category));
-                displayList.addAll(categoriesMap.get(category));
+                for (Product p : categoriesMap.get(category)) {
+                    if (inBudget(p)) displayList.add(p);
+                }
             }
         }
         // This is a simplified logic. A full implementation would rebuild the whole
         // displayList with Brand and all Category headers for the selected brand.
         // For simplicity, we'll just show one category at a time.
         adapter.notifyDataSetChanged();
+    }
+
+    // ---- customer budget filter ----
+
+    private boolean inBudget(Product p) {
+        if (budgetMin == null && budgetMax == null) return true;
+        double price = p.getPrice();
+        if (budgetMin != null && price < budgetMin) return false;
+        if (budgetMax != null && price > budgetMax) return false;
+        return true;
+    }
+
+    private void onBudgetChanged() {
+        boolean on = budgetMin != null || budgetMax != null;
+        String label;
+        if (budgetMin != null && budgetMax != null) label = "₹" + budgetMin.intValue() + " – ₹" + budgetMax.intValue();
+        else if (budgetMin != null) label = "From ₹" + budgetMin.intValue();
+        else if (budgetMax != null) label = "Up to ₹" + budgetMax.intValue();
+        else label = "Budget";
+        budgetChip.setText(label);
+        budgetChip.setCloseIconVisible(on);
+        budgetChip.setChipBackgroundColorResource(on ? R.color.primaryColor : android.R.color.white);
+        budgetChip.setTextColor(getResources().getColor(on ? android.R.color.white : R.color.chipText, getTheme()));
+        budgetChip.setChipIconTintResource(on ? android.R.color.white : R.color.chipText);
+        budgetChip.setCloseIconTintResource(android.R.color.white);
+        updateProductGrid(currentCategory);
+    }
+
+    private void showBudgetDialog() {
+        final android.app.Dialog dialog = new android.app.Dialog(this);
+        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_budget);
+        android.widget.EditText minField = dialog.findViewById(R.id.budget_min);
+        android.widget.EditText maxField = dialog.findViewById(R.id.budget_max);
+        if (budgetMin != null) minField.setText(String.valueOf(budgetMin.intValue()));
+        if (budgetMax != null) maxField.setText(String.valueOf(budgetMax.intValue()));
+        dialog.findViewById(R.id.budget_clear).setOnClickListener(v -> {
+            budgetMin = null; budgetMax = null; onBudgetChanged(); dialog.dismiss();
+        });
+        dialog.findViewById(R.id.budget_apply).setOnClickListener(v -> {
+            Double lo = parseBudget(minField.getText().toString());
+            Double hi = parseBudget(maxField.getText().toString());
+            if (lo != null && hi != null && lo > hi) {
+                maxField.setError("Must be at least the From amount");
+                return;
+            }
+            budgetMin = lo; budgetMax = hi; onBudgetChanged(); dialog.dismiss();
+        });
+        dialog.show();
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setLayout(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+        }
+        maxField.requestFocus();
+    }
+
+    @Nullable
+    private static Double parseBudget(String s) {
+        try {
+            String t = s.trim().replace(",", "");
+            if (t.isEmpty()) return null;
+            double v = Double.parseDouble(t);
+            return v >= 0 ? v : null;
+        } catch (NumberFormatException e) { return null; }
     }
 
     @Override

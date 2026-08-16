@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,9 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,9 +53,15 @@ public class Fragment_Home extends Fragment {
 
     private Button loginButton;
     private TextView headerLabel;
-    private AppCompatButton threeSButton, verboseButton, createCatalogueButton;
+    private View threeSButton, trophyverseButton, verboseButton;
+    private TextView threeSLabel, trophyverseLabel, verboseLabel;
+    private LinearLayout brandPanel;
+    private EditText searchInput;
+    private AppCompatButton createCatalogueButton;
     private GridView gridView;
     private ImageButton whatsappFab;
+
+    private String currentBrand = "3S";
 
 
     private categoryAdapter gridAdapter;
@@ -92,7 +102,13 @@ public class Fragment_Home extends Fragment {
         loginButton = view.findViewById(R.id.login);
         headerLabel = view.findViewById(R.id.headerLabel);
         threeSButton = view.findViewById(R.id.three_s_button);
+        trophyverseButton = view.findViewById(R.id.trophyverse_button);
         verboseButton = view.findViewById(R.id.verbose_button);
+        threeSLabel = view.findViewById(R.id.three_s_label);
+        trophyverseLabel = view.findViewById(R.id.trophyverse_label);
+        verboseLabel = view.findViewById(R.id.verbose_label);
+        brandPanel = view.findViewById(R.id.brand_panel);
+        searchInput = view.findViewById(R.id.search_input);
         createCatalogueButton = view.findViewById(R.id.create_catalogue_button);
         gridView = view.findViewById(R.id.gridView);
         whatsappFab = view.findViewById(R.id.whatsapp_fab);
@@ -109,8 +125,24 @@ public class Fragment_Home extends Fragment {
                 startActivity(intent);
             }
         });
-        threeSButton.setOnClickListener(v -> selectThreeSButton());
-        verboseButton.setOnClickListener(v -> selectVerboseButton());
+        threeSButton.setOnClickListener(v -> selectBrand("3S"));
+        trophyverseButton.setOnClickListener(v -> selectBrand("Trophyverse"));
+        verboseButton.setOnClickListener(v -> selectBrand("Verbose"));
+
+        searchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                applyFilters();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
         whatsappFab.setOnClickListener(v -> showWhatsAppBottomSheet());
         loginButton.setOnClickListener(v -> {
 
@@ -168,13 +200,7 @@ public class Fragment_Home extends Fragment {
     }
 
     private void updateLoginButtonState() {
-        if (ParseUser.getCurrentUser() != null) {
-            loginButton.setText("Logout");
-            whatsappFab.setVisibility(View.VISIBLE);
-        } else {
-            loginButton.setText("Login");
-            whatsappFab.setVisibility(View.GONE);
-        }
+        loginButton.setText(ParseUser.getCurrentUser() != null ? "Logout" : "Login");
     }
 
     /**
@@ -195,7 +221,9 @@ public class Fragment_Home extends Fragment {
                     // Success: We got the objects
                     all_category_data.addAll(objects);
                     // Initially, show the "3S" categories by default
-                    selectThreeSButton();
+                    selectBrand("3S");
+                } else if (SessionGuard.recover(e, () -> { if (isAdded()) { updateLoginButtonState(); loadCategoriesFromParse(); } })) {
+                    return;   // stale dealer session cleared; reloading
                 } else {
                     // Failure: Handle the error
                     Log.e("ParseError", "Error fetching categories: " + e.getMessage());
@@ -220,61 +248,67 @@ public class Fragment_Home extends Fragment {
 
             Intent intent = new Intent(requireActivity(), CategoryDetail.class);
             intent.putExtra("CATEGORY_NAME", selectedCategory.getString("Name"));
+            intent.putExtra("BRAND_NAME", currentBrand);
 
             startActivity(intent);
 
         });
     }
 
-    private void selectThreeSButton() {
-        threeSButton.setBackgroundResource(R.drawable.selected_button);
-        threeSButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+    /**
+     * Highlights the tapped brand tab, fuses it into the brand-coloured panel
+     * below (Swiggy-style), and refreshes search hint + category grid.
+     */
+    private void selectBrand(String brand) {
+        View[] tabs = {threeSButton, trophyverseButton, verboseButton};
+        TextView[] labels = {threeSLabel, trophyverseLabel, verboseLabel};
+        String[] brands = {"3S", "Trophyverse", "Verbose"};
+        // Brand colours: 3S deep green, Trophyverse burgundy, Verbose royal blue.
+        // Unselected tabs keep a soft tint of their own colour so switching feels intuitive.
+        int[] selectedBg = {R.drawable.tab_top_3s, R.drawable.tab_top_trophyverse, R.drawable.tab_top_verbose};
+        int[] unselectedBg = {R.drawable.tab_unsel_3s, R.drawable.tab_unsel_trophy, R.drawable.tab_unsel_verbose};
+        int[] panelBg = {R.drawable.bg_panel_3s, R.drawable.bg_panel_trophy, R.drawable.bg_panel_verbose};
+        int[] brandColors = {0xFF16604A, 0xFF5E0021, 0xFF0032D2};
 
-        verboseButton.setBackgroundResource(R.drawable.unselected_button);
-        verboseButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.black)); // Replace with your color
+        currentBrand = brand;
 
-        headerLabel.setText("3S Categories");
-        sortAndDisplayThreeS();
-    }
+        for (int i = 0; i < tabs.length; i++) {
+            if (brands[i].equals(brand)) {
+                tabs[i].setBackgroundResource(selectedBg[i]);
+                labels[i].setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+                brandPanel.setBackgroundResource(panelBg[i]);
+                createCatalogueButton.getBackground().mutate().setTint(brandColors[i]);
+            } else {
+                tabs[i].setBackgroundResource(unselectedBg[i]);
+                labels[i].setTextColor(brandColors[i]);
+            }
+        }
 
-    private void selectVerboseButton() {
-        verboseButton.setBackgroundResource(R.drawable.selected_button);
-        verboseButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-
-        threeSButton.setBackgroundResource(R.drawable.unselected_button);
-        threeSButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.black)); // Replace with your color
-
-        headerLabel.setText("Verbose Categories");
-        sortAndDisplayVerbose();
+        headerLabel.setText(brand + " Categories");
+        searchInput.setHint("Search in " + brand);
+        if (searchInput.getText().length() > 0) {
+            searchInput.setText(""); // triggers applyFilters() via the watcher
+        } else {
+            applyFilters();
+        }
     }
 
     /**
-     * NEW FUNCTION: Filters categories where the 'Brand' is "3S" and updates the GridView.
+     * Shows categories of the current brand whose name matches the search text.
      */
-    private void sortAndDisplayThreeS() {
-        displayed_data.clear();
-        for (ParseObject category : all_category_data) {
-            // Check the "Brand" key for the value "3S"
-            if ("3S".equals(category.getString("Brand"))) {
-                displayed_data.add(category);
-            }
-        }
-        // Refresh the GridView with the filtered list
-        gridAdapter.notifyDataSetChanged();
-    }
+    private void applyFilters() {
+        String query = searchInput.getText().toString().trim().toLowerCase();
 
-    /**
-     * NEW FUNCTION: Filters categories where the 'Brand' is "Verbose" and updates the GridView.
-     */
-    private void sortAndDisplayVerbose() {
         displayed_data.clear();
         for (ParseObject category : all_category_data) {
-            // Check the "Brand" key for the value "Verbose"
-            if ("Verbose".equals(category.getString("Brand"))) {
+            if (!currentBrand.equals(category.getString("Brand"))) {
+                continue;
+            }
+            String name = category.getString("Name");
+            if (query.isEmpty() || (name != null && name.toLowerCase().contains(query))) {
                 displayed_data.add(category);
             }
         }
-        // Refresh the GridView with the filtered list
         gridAdapter.notifyDataSetChanged();
     }
 
@@ -285,6 +319,18 @@ public class Fragment_Home extends Fragment {
         // Inflate the custom layout
         View sheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_whatsapp, null);
         bottomSheetDialog.setContentView(sheetView);
+
+        // Broadcast channels
+        View channelTrophy = sheetView.findViewById(R.id.option_channel_trophyverse);
+        View channelBranding = sheetView.findViewById(R.id.option_channel_branding);
+        channelTrophy.setOnClickListener(v -> {
+            openLink("https://whatsapp.com/channel/0029Vb9IWhYEKyZORh3Tp647");
+            bottomSheetDialog.dismiss();
+        });
+        channelBranding.setOnClickListener(v -> {
+            openLink("https://whatsapp.com/channel/0029VbDLYkX23n3mI81HrB21");
+            bottomSheetDialog.dismiss();
+        });
 
         // Find the options inside the bottom sheet
         TextView option3S = sheetView.findViewById(R.id.option_3s_enquiry);
@@ -308,6 +354,10 @@ public class Fragment_Home extends Fragment {
         });
 
         bottomSheetDialog.show();
+    }
+
+    private void openLink(String url) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
     private void openWhatsApp(String whatsAppRedirect, String message) {

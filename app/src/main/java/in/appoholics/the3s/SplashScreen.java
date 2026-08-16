@@ -21,6 +21,13 @@ public class SplashScreen extends AppCompatActivity {
     private static final String PREFS_NAME = "AppSettings";
     private static final String SERIES_KEY = "CURRENT_SERIES";
 
+    /**
+     * Debug-only preview of an unpublished collection. Debug builds use this
+     * series instead of Basic.CurrentSeries; release builds always follow the
+     * server. Set to null to follow the server in debug builds too.
+     */
+    private static final String DEBUG_SERIES_OVERRIDE = "26-27";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +37,16 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void fetchBasicSettings() {
+        if (BuildConfig.DEBUG && DEBUG_SERIES_OVERRIDE != null) {
+            saveSeriesToPrefs(DEBUG_SERIES_OVERRIDE);
+            Log.w("SplashScreen", "DEBUG build: previewing series " + DEBUG_SERIES_OVERRIDE
+                    + " instead of the published one");
+            Toast.makeText(this, "Preview: " + DEBUG_SERIES_OVERRIDE + " collection",
+                    Toast.LENGTH_SHORT).show();
+            navigateToMainApp();
+            return;
+        }
+
         // We assume there is only one settings object, so we get the first one.
         // In your Parse Dashboard, you might have to get the specific objectId.
         ParseQuery<ParseObject> query = new ParseQuery<>("Basic");
@@ -44,6 +61,8 @@ public class SplashScreen extends AppCompatActivity {
                         saveSeriesToPrefs(currentSeries);
                         Log.d("SplashScreen", "Current Series saved: " + currentSeries);
                     }
+                } else if (SessionGuard.recover(e, () -> fetchBasicSettings())) {
+                    return;   // stale dealer session cleared; the retry continues from here
                 } else {
                     // Failure: Handle the error
                     Log.e("SplashScreen", "Failed to fetch Basic settings", e);
