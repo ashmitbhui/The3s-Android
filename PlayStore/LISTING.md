@@ -3,34 +3,41 @@
 Package: `in.appoholics.the3s` · Category: Business · Content rating: Everyone · Contains ads: No · In-app purchases: No
 
 ## App name (30 chars max)
-The 3S — Corporate Gifting
+The 3S
+
+(Keep the name plain — Play flags names padded with keywords. "Corporate Gifting" goes in the short description.)
 
 ## Short description (80 chars max)
-Catalogue for 3S clocks, TrophyVerse awards & Verbose merchandise. Share on WhatsApp.
+Product catalogue for The 3S: clocks, trophies & merchandise. Browse & share.
 
 ## Full description (4000 chars max)
-The 3S is the catalogue app for India's corporate gifting trade — three brands, one place.
+The 3S is the official product catalogue app of The 3S, a manufacturer of corporate gifts in India. It shows the current season's range across our three brands, with photos and specifications, and lets you share products directly with your customers.
 
-3S — wall clocks, table clocks, photo frames and wrist watches, ready for your branding.
-TROPHYVERSE — awards, trophies, plaques and mementos with quick engraving and printing options.
-VERBOSE — notebooks, pens, bags, drinkware, caps and apparel for corporate merchandise programmes.
-
-BROWSE
-• Every product with full specifications, sizes, weights and pack quantities
-• Multi-photo galleries, so you see each item from every angle
-• Search across all three brands, sort and filter by price
-• Save favourites for quick reordering
-
-SHARE
-• Share any product — image and details — straight to WhatsApp or anywhere
-• Marketing videos, PDFs and images you can forward to your customers
+WHAT YOU CAN DO WITHOUT AN ACCOUNT
+• Browse the full range by brand and category:
+  – 3S: wall clocks, table clocks, photo frames, wrist watches
+  – TrophyVerse: trophies, awards, plaques and mementos
+  – Verbose: notebooks, pens, bags, drinkware, caps, T-shirts, shirts, jackets, gift combos
+• Open any product to see its photo gallery and full specifications (size, dial size, weight, material, printing area, warranty)
+• Search products by name across all brands
+• Mark products as favourites and find them again on the Favourites tab
+• Share a product (photo + specifications) to WhatsApp or any other app; select several products and share them together
+• Send a WhatsApp enquiry about a product to our sales team in one tap
+• Watch and forward marketing videos, product PDFs and images from the Marketing tab
 • Follow our WhatsApp channels for ready-stock updates and new designs
 
-FOR DEALERS
-• Sign in to build your own catalogue: pick products across brands and categories, set a customer budget, add your margin, and export a polished PDF in seconds
-• One-tap WhatsApp enquiry on every product
+WHAT YOU CAN DO AS A REGISTERED DEALER
+Dealers who buy from The 3S get a login from our sales team (there is no sign-up inside the app). After signing in you can additionally:
+• See dealer prices on every product
+• Sort and filter categories by price
+• Build your own customer catalogue: choose products across brands and categories, set a customer budget, add your margin (percentage or fixed amount) or hide prices, and export it as a PDF to share
+• Choose, when sharing a product, whether the price is included, marked up with your margin, or left out
 
-Fresh collections land every season — the app updates automatically.
+OTHER DETAILS
+• The catalogue updates automatically when a new season is published — no app update needed
+• Notifications are used only to announce new collections and offers
+• The app is in English and prices are shown in Indian Rupees (₹)
+• To request a dealer account, contact us through the WhatsApp enquiry option in the app
 
 ## Graphics (this folder → `out/`)
 | Asset | File | Spec |
