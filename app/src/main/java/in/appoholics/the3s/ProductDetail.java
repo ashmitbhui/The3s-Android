@@ -106,14 +106,17 @@ public class ProductDetail extends AppCompatActivity {
         favoriteButton = findViewById(R.id.product_detail_favorite);
         shareButton = findViewById(R.id.share_button);
 
+        MaterialButton saveButton = findViewById(R.id.save_image_button);
+        saveButton.setOnClickListener(v -> saveCurrentImage());
+
         MaterialButton whatsappButton = findViewById(R.id.whatsapp_enquiry_button);
         // WhatsApp enquiry is a dealer-only feature; Share fills the row when it is hidden
         if (!UserStatus.isLoggedIn()) {
             whatsappButton.setVisibility(View.GONE);
             android.widget.LinearLayout.LayoutParams lp =
-                    (android.widget.LinearLayout.LayoutParams) shareButton.getLayoutParams();
+                    (android.widget.LinearLayout.LayoutParams) saveButton.getLayoutParams();
             lp.width = 0; lp.weight = 1; lp.setMarginEnd(0);
-            shareButton.setLayoutParams(lp);
+            saveButton.setLayoutParams(lp);
         }
         whatsappButton.setOnClickListener(v -> {
             String productName = nameTextView.getText().toString();
@@ -250,6 +253,68 @@ public class ProductDetail extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    /** Saves the photo currently shown in the slider to the device Gallery (Pictures/The 3S). */
+    private static final int REQ_SAVE_IMAGE = 7311;
+
+    private void saveCurrentImage() {
+        // Android 7–9 need the legacy storage permission at runtime; 10+ uses MediaStore without it
+        if (android.os.Build.VERSION.SDK_INT < 29 && checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQ_SAVE_IMAGE);
+            return;
+        }
+        if (mediaItems.isEmpty()) { Toast.makeText(this, "No image to save", Toast.LENGTH_SHORT).show(); return; }
+        int idx = Math.max(0, Math.min(viewPager.getCurrentItem(), mediaItems.size() - 1));
+        MediaItem item = mediaItems.get(idx);
+        if (!"image".equalsIgnoreCase(item.getType())) { Toast.makeText(this, "Swipe to a photo to save it", Toast.LENGTH_SHORT).show(); return; }
+        String name = (currentProduct != null ? currentProduct.getString("Name") : "product");
+        if (name == null) name = "product";
+        final String fileName = name.replaceAll("[^\\w\\- ]+", "").trim() + (mediaItems.size() > 1 ? "-" + (idx + 1) : "") + ".jpg";
+        Toast.makeText(this, "Saving…", Toast.LENGTH_SHORT).show();
+        java.util.concurrent.Executors.newSingleThreadExecutor().execute(() -> {
+            boolean ok = false;
+            try {
+                android.graphics.Bitmap bmp = com.bumptech.glide.Glide.with(this).asBitmap().load(item.getUrl()).submit().get();
+                android.content.ContentValues cv = new android.content.ContentValues();
+                cv.put(android.provider.MediaStore.Images.Media.DISPLAY_NAME, fileName);
+                cv.put(android.provider.MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                android.net.Uri uri;
+                if (android.os.Build.VERSION.SDK_INT >= 29) {
+                    cv.put(android.provider.MediaStore.Images.Media.RELATIVE_PATH, android.os.Environment.DIRECTORY_PICTURES + "/The 3S");
+                    cv.put(android.provider.MediaStore.Images.Media.IS_PENDING, 1);
+                    uri = getContentResolver().insert(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv);
+                } else {
+                    java.io.File dir = new java.io.File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_PICTURES), "The 3S");
+                    if (!dir.exists()) dir.mkdirs();
+                    cv.put(android.provider.MediaStore.Images.Media.DATA, new java.io.File(dir, fileName).getAbsolutePath());
+                    uri = getContentResolver().insert(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv);
+                }
+                if (uri != null) {
+                    try (java.io.OutputStream out = getContentResolver().openOutputStream(uri)) {
+                        ok = out != null && bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG, 92, out);
+                    }
+                    if (android.os.Build.VERSION.SDK_INT >= 29) {
+                        cv.clear(); cv.put(android.provider.MediaStore.Images.Media.IS_PENDING, 0);
+                        getContentResolver().update(uri, cv, null, null);
+                    }
+                }
+            } catch (Exception e) {
+                Log.e("SaveImage", "Could not save image", e);
+            }
+            final boolean saved = ok;
+            runOnUiThread(() -> Toast.makeText(this, saved ? "Saved to Gallery (Pictures/The 3S)" : "Could not save the image", Toast.LENGTH_SHORT).show());
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQ_SAVE_IMAGE && grantResults.length > 0
+                && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            saveCurrentImage();
+        }
     }
 
     /** Every image of the product (cover + slides) plus the full details; dealers pick pricing. */

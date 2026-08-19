@@ -8,9 +8,11 @@
     tools:context=".ProductDetail">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/product_detail_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -30,11 +32,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="16dp"
-            app:dotsColor="#CCCCCC"
+            app:dotsColor="#CFDCD4"
             app:dotsCornerRadius="8dp"
             app:dotsSize="8dp"
             app:dotsSpacing="4dp"
-            app:selectedDotColor="@color/black" />
+            app:selectedDotColor="@color/primaryColor" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -47,29 +49,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:paddingBottom="88dp">
 
             <TextView
                 android:id="@+id/product_detail_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="24sp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/textPrimary"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                tools:text="Product Name" />
+                tools:text="Regal Table Clock" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="6dp">
 
                 <TextView
                     android:id="@+id/product_detail_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/priceGreen"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     tools:text="₹1,299" />
 
                 <ImageButton
@@ -86,11 +92,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.1"
                 android:text="Details"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textAllCaps="true"
+                android:textColor="@color/captionMuted"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/product_detail_description"
@@ -98,29 +106,71 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:lineSpacingExtra="4dp"
-                android:textSize="16sp"
+                android:textColor="#4A564F"
+                android:textSize="15sp"
                 tools:text="This is a full, detailed description of the product. It can span multiple lines and provides all the necessary information for the customer to make a purchasing decision." />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
+        android:id="@+id/product_detail_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/white"
-        android:elevation="4dp"
-        android:gravity="end"
+        android:elevation="6dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="8dp">
-
+        android:paddingStart="14dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="12dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/share_button"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:icon="@drawable/ic_share" />
+            android:layout_height="44dp"
+            android:layout_marginEnd="10dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Share"
+            android:textAllCaps="false"
+            android:textColor="@color/primaryColor"
+            app:cornerRadius="22dp"
+            app:icon="@drawable/ic_share"
+            app:iconTint="@color/primaryColor"
+            app:strokeColor="@color/primaryColor" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save_image_button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginEnd="10dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/primaryColor"
+            app:cornerRadius="22dp"
+            app:icon="@drawable/ic_save_image"
+            app:iconTint="@color/primaryColor"
+            app:strokeColor="@color/primaryColor" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/whatsapp_enquiry_button"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="WhatsApp enquiry"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/primaryColor"
+            app:cornerRadius="22dp" />
 
     </LinearLayout>
 
