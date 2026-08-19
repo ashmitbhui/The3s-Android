@@ -111,6 +111,18 @@ public class MediaSliderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ImageViewHolder imageHolder = (ImageViewHolder) holder;
             Glide.with(context).load(item.getUrl()).into(imageHolder.imageView);
             imageHolder.shareButton.setOnClickListener(v -> shareMediaItem(item));
+            // tap to enlarge: full-screen viewer with all the product's photos
+            imageHolder.imageView.setOnClickListener(v -> {
+                java.util.ArrayList<String> urls = new java.util.ArrayList<>();
+                int start = 0;
+                for (MediaItem m : mediaItems) {
+                    if ("image".equalsIgnoreCase(m.getType())) {
+                        if (m == item) start = urls.size();
+                        urls.add(m.getUrl());
+                    }
+                }
+                ImageViewerActivity.open(context, urls, start);
+            });
         }
     }
 
