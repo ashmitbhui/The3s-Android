@@ -200,7 +200,10 @@ public class Fragment_Home extends Fragment {
     }
 
     private void updateLoginButtonState() {
-        loginButton.setText(ParseUser.getCurrentUser() != null ? "Logout" : "Login");
+        boolean loggedIn = ParseUser.getCurrentUser() != null;
+        loginButton.setText(loggedIn ? "Logout" : "Login");
+        // WhatsApp (channels + enquiry chats) is a dealer-only feature
+        if (whatsappFab != null) whatsappFab.setVisibility(loggedIn ? View.VISIBLE : View.GONE);
     }
 
     /**

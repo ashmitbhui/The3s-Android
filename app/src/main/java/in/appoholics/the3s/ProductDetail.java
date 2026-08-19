@@ -107,6 +107,14 @@ public class ProductDetail extends AppCompatActivity {
         shareButton = findViewById(R.id.share_button);
 
         MaterialButton whatsappButton = findViewById(R.id.whatsapp_enquiry_button);
+        // WhatsApp enquiry is a dealer-only feature; Share fills the row when it is hidden
+        if (!UserStatus.isLoggedIn()) {
+            whatsappButton.setVisibility(View.GONE);
+            android.widget.LinearLayout.LayoutParams lp =
+                    (android.widget.LinearLayout.LayoutParams) shareButton.getLayoutParams();
+            lp.width = 0; lp.weight = 1; lp.setMarginEnd(0);
+            shareButton.setLayoutParams(lp);
+        }
         whatsappButton.setOnClickListener(v -> {
             String productName = nameTextView.getText().toString();
             String category = currentProduct != null ? currentProduct.getString("Category") : null;
