@@ -1,26 +1,14 @@
 # Products without images — 26-27 season
 
-**41 of 686 products** have no photo (as of 20 Aug 2026).
+**29 of 686 products** have no photo (as of 20 Aug 2026).
 
-## Verbose · Bags (17)
+## Verbose · Bags (5)
 
-- #276 Infosys
-- #277 The British Car Company
-- #278 Aston Martin
-- #279 Michelin
-- #280 Cadillac
 - #281 Jaisalmer
 - #282 Life Is About Moments
 - #283 Trivgo
 - #288 Nvidia
 - #290 TripAdvisor
-- #291 Window 10
-- #292 Yamaha
-- #293 Oracle
-- #294 IndiGo
-- #295 Dyson
-- #296 Grupo Fragnani
-- #297 Alliance India
 
 ## Verbose · Caps (4)
 
