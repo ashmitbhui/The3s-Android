@@ -73,7 +73,7 @@ def call(method, path, data=None, content_type="application/json"):
         body = data if isinstance(data, bytes) else json.dumps(data).encode()
         req.add_header("Content-Type", content_type)
     try:
-        with urllib.request.urlopen(req, body) as resp:
+        with urllib.request.urlopen(req, body, timeout=120) as resp:
             return json.loads(resp.read().decode())
     except urllib.error.HTTPError as e:
         raise ParseError(e.code, path, e.read().decode())
@@ -249,12 +249,16 @@ def strip_category_words(name_hint, categories):
 
 
 def open_image(path):
-    """Open any photo as a PIL image, converting HEIC via macOS sips when needed."""
-    from PIL import Image
+    """Open any photo as a PIL image, upright, converting HEIC via macOS sips when needed.
+
+    Cameras record portrait shots as landscape pixels plus an EXIF orientation flag;
+    without applying it here the photo is baked in sideways.
+    """
+    from PIL import Image, ImageOps
     try:
         im = Image.open(path)
         im.load()
-        return im
+        return ImageOps.exif_transpose(im)
     except Exception:
         import subprocess, tempfile
         tmp = pathlib.Path(tempfile.mkdtemp()) / (path.stem + ".png")
@@ -262,7 +266,7 @@ def open_image(path):
                        capture_output=True, check=True)
         im = Image.open(tmp)
         im.load()
-        return im
+        return ImageOps.exif_transpose(im)
 
 
 def prepare(path: pathlib.Path, max_dim, quality, square=True):
