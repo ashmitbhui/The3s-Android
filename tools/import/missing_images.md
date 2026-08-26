@@ -1,14 +1,6 @@
 # Products without images — 26-27 season
 
-**29 of 686 products** have no photo (as of 20 Aug 2026).
-
-## Verbose · Bags (5)
-
-- #281 Jaisalmer
-- #282 Life Is About Moments
-- #283 Trivgo
-- #288 Nvidia
-- #290 TripAdvisor
+**22 of 686 products** have no photo.
 
 ## Verbose · Caps (4)
 
@@ -29,10 +21,6 @@
 - #124 Bangalore
 - #125 Chennai
 
-## Verbose · Lifestyle Products (1)
-
-- #173 Upwork
-
 ## Verbose · Mouse Pad (1)
 
 - #99 Cisco
@@ -50,7 +38,3 @@
 ## Verbose · Shirts (1)
 
 - #228 Philips
-
-## Verbose · Travel Essentials (1)
-
-- #135 Hyatt

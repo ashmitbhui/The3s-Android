@@ -1,9 +1,4 @@
 Brand,Category,Item,Product
-Verbose,Bags,281,Jaisalmer
-Verbose,Bags,282,Life Is About Moments
-Verbose,Bags,283,Trivgo
-Verbose,Bags,288,Nvidia
-Verbose,Bags,290,TripAdvisor
 Verbose,Caps,340,Slack
 Verbose,Caps,341,Volvo
 Verbose,Caps,368,Cult Fit
@@ -17,7 +12,6 @@ Verbose,Fridge Magnets,122,Delhi
 Verbose,Fridge Magnets,123,Gurugram
 Verbose,Fridge Magnets,124,Bangalore
 Verbose,Fridge Magnets,125,Chennai
-Verbose,Lifestyle Products,173,Upwork
 Verbose,Mouse Pad,99,Cisco
 Verbose,Notebooks,1,Facebook
 Verbose,Notebooks,2,Coca Cola
@@ -27,4 +21,3 @@ Verbose,Notebooks,44,iPhone
 Verbose,Notebooks,45,Mercedes Benz
 Verbose,Notebooks,54,OnePlus
 Verbose,Shirts,228,Philips
-Verbose,Travel Essentials,135,Hyatt
