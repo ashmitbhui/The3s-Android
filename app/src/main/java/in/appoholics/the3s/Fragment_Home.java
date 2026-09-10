@@ -337,6 +337,13 @@ public class Fragment_Home extends Fragment {
         });
 
         // Find the options inside the bottom sheet
+        // Broadcast channels are for everyone; the enquiry chats are per-dealer (_User.ShowChats)
+        boolean chats = UserStatus.showChats();
+        sheetView.findViewById(R.id.chats_divider).setVisibility(chats ? View.VISIBLE : View.GONE);
+        sheetView.findViewById(R.id.chats_caption).setVisibility(chats ? View.VISIBLE : View.GONE);
+        sheetView.findViewById(R.id.option_3s_enquiry).setVisibility(chats ? View.VISIBLE : View.GONE);
+        sheetView.findViewById(R.id.option_verbose_enquiry).setVisibility(chats ? View.VISIBLE : View.GONE);
+        sheetView.findViewById(R.id.option_auto_response).setVisibility(chats ? View.VISIBLE : View.GONE);
         TextView option3S = sheetView.findViewById(R.id.option_3s_enquiry);
         TextView optionVerbose = sheetView.findViewById(R.id.option_verbose_enquiry);
         TextView optionAuto = sheetView.findViewById(R.id.option_auto_response);

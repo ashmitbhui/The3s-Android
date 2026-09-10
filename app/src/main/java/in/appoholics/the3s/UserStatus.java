@@ -11,6 +11,13 @@ public class UserStatus {
         return ParseUser.getCurrentUser() != null;
     }
 
+    /** Per-dealer switch (_User.ShowChats): hides the enquiry chats for this dealer. Defaults to visible. */
+    public static boolean showChats() {
+        com.parse.ParseUser u = ParseUser.getCurrentUser();
+        if (u == null) return false;
+        return !u.has("ShowChats") || u.getBoolean("ShowChats");
+    }
+
     /** Portal switch (Basic.ShowWhatsApp), cached at launch. Defaults to visible. */
     public static boolean showWhatsApp(android.content.Context ctx) {
         return ctx.getSharedPreferences("AppSettings", android.content.Context.MODE_PRIVATE)
