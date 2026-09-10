@@ -91,6 +91,7 @@ public class CategoryDetail extends AppCompatActivity implements ProductAdapter.
         if (categoryName != null && !categoryName.isEmpty()) {
             categoryHeader.setText(categoryName);
             loadProductsFromParse(categoryName, brandName);
+            loadCategoryCatalogue(categoryName, brandName);
         } else {
             Toast.makeText(this, "Category not found", Toast.LENGTH_SHORT).show();
             finish();
@@ -101,6 +102,79 @@ public class CategoryDetail extends AppCompatActivity implements ProductAdapter.
      * Colours the header (and the status bar area above it) in the brand colour
      * of the world this category belongs to.
      */
+    /** 'Coaster' should match the 'Coasters' category — compare trailing-s-insensitively. */
+    private static String normName(String s) {
+        String t = (s == null ? "" : s).toLowerCase().replaceAll("[^a-z0-9]", "");
+        return t.endsWith("s") ? t.substring(0, t.length() - 1) : t;
+    }
+
+    /** Shows the 'Category catalogue' bar when the portal has a PDF for this category. */
+    private void loadCategoryCatalogue(String categoryName, @Nullable String brandName) {
+        String brand = brandName != null ? brandName : "3S";
+        ParseQuery<ParseObject> q = new ParseQuery<>("Catalogue");
+        q.whereEqualTo("isEnabled", true);
+        q.whereEqualTo("Brand", brand);
+        q.findInBackground((rows, e) -> {
+            if (e != null || rows == null || isFinishing()) return;
+            ParseObject match = null;
+            for (ParseObject r : rows) {
+                if (normName(r.getString("Name")).equals(normName(categoryName))) { match = r; break; }
+            }
+            if (match == null || match.getParseFile("File") == null) return;
+            final String url = match.getParseFile("File").getUrl();
+            final String fileName = categoryName.replaceAll("[^\\w\\- ]+", "").trim() + " Catalogue.pdf";
+            View bar = findViewById(R.id.catalogue_bar);
+            android.widget.TextView sub = findViewById(R.id.catalogue_sub);
+            sub.setText("Full " + categoryName + " range as a PDF");
+            bar.setVisibility(View.VISIBLE);
+            findViewById(R.id.catalogue_view).setOnClickListener(v -> openCataloguePdf(url, fileName, false));
+            findViewById(R.id.catalogue_share).setOnClickListener(v -> openCataloguePdf(url, fileName, true));
+        });
+    }
+
+    /** Downloads the catalogue PDF to cache, then opens it (or shares it). */
+    private void openCataloguePdf(String url, String fileName, boolean share) {
+        ProgressDialog progress = new ProgressDialog(this);
+        progress.setMessage(share ? "Preparing catalogue…" : "Opening catalogue…");
+        progress.setCancelable(false);
+        progress.show();
+        ExecutorService ex = Executors.newSingleThreadExecutor();
+        ex.execute(() -> {
+            Uri uri = null;
+            try {
+                File dir = new File(getCacheDir(), "catalogues");
+                if (!dir.exists()) dir.mkdirs();
+                File out = new File(dir, fileName);
+                try (InputStream in = new java.net.URL(url).openStream();
+                     OutputStream fos = new FileOutputStream(out)) {
+                    byte[] buf = new byte[8192];
+                    int len;
+                    while ((len = in.read(buf)) > 0) fos.write(buf, 0, len);
+                }
+                uri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", out);
+            } catch (Exception err) {
+                Log.e("Catalogue", "download failed", err);
+            }
+            final Uri result = uri;
+            runOnUiThread(() -> {
+                progress.dismiss();
+                if (result == null) { Toast.makeText(this, "Could not load the catalogue.", Toast.LENGTH_SHORT).show(); return; }
+                Intent intent;
+                if (share) {
+                    intent = new Intent(Intent.ACTION_SEND).setType("application/pdf")
+                            .putExtra(Intent.EXTRA_STREAM, result);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    startActivity(Intent.createChooser(intent, "Share catalogue"));
+                } else {
+                    intent = new Intent(Intent.ACTION_VIEW).setDataAndType(result, "application/pdf");
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    try { startActivity(intent); }
+                    catch (Exception noApp) { Toast.makeText(this, "No app found to open PDF.", Toast.LENGTH_SHORT).show(); }
+                }
+            });
+        });
+    }
+
     private void applyBrandColour(String brandName) {
         int colour = 0xFF16604A; // 3S default
         if ("Trophyverse".equals(brandName)) {
