@@ -110,8 +110,8 @@ public class ProductDetail extends AppCompatActivity {
         saveButton.setOnClickListener(v -> saveCurrentImage());
 
         MaterialButton whatsappButton = findViewById(R.id.whatsapp_enquiry_button);
-        // WhatsApp enquiry is a dealer-only feature; Share fills the row when it is hidden
-        if (!UserStatus.isLoggedIn()) {
+        // WhatsApp enquiry: dealer-only + portal switch; Save fills the row when it is hidden
+        if (!UserStatus.isLoggedIn() || !UserStatus.showWhatsApp(this)) {
             whatsappButton.setVisibility(View.GONE);
             android.widget.LinearLayout.LayoutParams lp =
                     (android.widget.LinearLayout.LayoutParams) saveButton.getLayoutParams();

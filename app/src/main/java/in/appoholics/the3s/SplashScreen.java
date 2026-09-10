@@ -61,6 +61,10 @@ public class SplashScreen extends AppCompatActivity {
                         saveSeriesToPrefs(currentSeries);
                         Log.d("SplashScreen", "Current Series saved: " + currentSeries);
                     }
+                    // Portal switch: hide every WhatsApp entry point when false
+                    boolean showWa = !object.has("ShowWhatsApp") || object.getBoolean("ShowWhatsApp");
+                    getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit()
+                            .putBoolean("SHOW_WHATSAPP", showWa).apply();
                 } else if (SessionGuard.recover(e, () -> fetchBasicSettings())) {
                     return;   // stale dealer session cleared; the retry continues from here
                 } else {

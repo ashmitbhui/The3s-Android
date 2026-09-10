@@ -10,4 +10,10 @@ public class UserStatus {
     public static boolean isLoggedIn() {
         return ParseUser.getCurrentUser() != null;
     }
+
+    /** Portal switch (Basic.ShowWhatsApp), cached at launch. Defaults to visible. */
+    public static boolean showWhatsApp(android.content.Context ctx) {
+        return ctx.getSharedPreferences("AppSettings", android.content.Context.MODE_PRIVATE)
+                .getBoolean("SHOW_WHATSAPP", true);
+    }
 }
