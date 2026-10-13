@@ -1,130 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F2F5"
-    tools:context=".MainActivity">
+    android:background="@color/white"
+    tools:context=".HomeFrame">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <!-- Immersive gradient header with decorative circles -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/primaryColor"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="sans-serif-medium"
-                android:text="3s  |  ⚓︎"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:paddingStart="12dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="12dp">
 
-            <Button
-                android:id="@+id/login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/white"
-                android:text="Login"
-                android:textAllCaps="false"
-                android:textColor="@android:color/darker_gray"
-                app:cornerRadius="10dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp">
 
-        </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="3S  ⚓︎"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Crafted catalogues, three worlds ✨"
+                            android:textColor="@color/textSecondary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!-- Currency switcher: only dealers given more than one currency -->
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/currency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_toStartOf="@id/login"
+                        android:background="@drawable/bg_currency_pill"
+                        android:drawableEnd="@drawable/ic_chevron_down_small"
+                        android:drawablePadding="4dp"
+                        android:minWidth="0dp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="10dp"
+                        android:stateListAnimator="@null"
+                        android:text="USD"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primaryColor"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_login_pill_light"
+                        android:minWidth="88dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:stateListAnimator="@null"
+                        android:text="Login"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textPrimary" />
+                </RelativeLayout>
+
+                <!-- Brand tab cards: selected one fuses into the panel below -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/three_s_button"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/tab_top_3s"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/three_s_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="3S"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/trophyverse_button"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/tab_unsel_trophy"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/trophyverse_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Trophyverse"
+                            android:textColor="#5E0021"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/verbose_button"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/tab_unsel_verbose"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/verbose_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Verbose"
+                            android:textColor="#0032D2"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- Brand-coloured block: search, CTA, label and grid all live here -->
         <LinearLayout
+            android:id="@+id/brand_panel"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:background="@drawable/down_shadow"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_panel_3s"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_search_bar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:contentDescription="Search"
+                    android:src="@drawable/ic_search" />
+
+                <EditText
+                    android:id="@+id/search_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:background="@null"
+                    android:hint="Search in 3S"
+                    android:imeOptions="actionSearch"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/textPrimary"
+                    android:textColorHint="#9AA0A6"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/create_catalogue_button"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_cta_solid"
+                android:fontFamily="sans-serif-medium"
+                android:stateListAnimator="@null"
+                android:text="✨  Create your Catalogue"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/headerLabel"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:text="Select a Category" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.1"
+                android:text="3S Categories"
+                android:textAllCaps="true"
+                android:textColor="@color/whiteMuted"
+                android:textSize="12sp" />
+
+            <GridView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:horizontalSpacing="12dp"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="2"
+                android:paddingTop="10dp"
+                android:paddingBottom="16dp"
+                android:scrollbars="none"
+                android:verticalSpacing="12dp" />
 
         </LinearLayout>
-
-        <LinearLayout
-            style="?android:attr/buttonBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="7dp"
-            android:background="@drawable/rounded_button_group"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/three_s_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/selected_button"
-                android:text="3S"
-                android:textColor="#ffffff" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/verbose_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/unselected_button"
-                android:text="Verbose"
-                android:textColor="#2C3E50" />
-        </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/create_catalogue_button"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="7dp"
-            android:visibility="visible"
-            android:background="@drawable/button_rounded_create_catalogue"
-            android:text="Create your Catalogue" />
-
-        <GridView
-            android:id="@+id/gridView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="7dp"
-            android:gravity="center"
-            android:horizontalSpacing="10dp"
-            android:numColumns="2"/>
 
     </LinearLayout>
 
     <!-- Floating Action Button (WhatsApp) -->
     <ImageButton
         android:id="@+id/whatsapp_fab"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
-        android:background="@android:color/transparent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/whatsapp" />
+        android:background="@drawable/bg_whatsapp_fab"
+        android:contentDescription="WhatsApp enquiry"
+        android:elevation="6dp"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/whatsapp_glyph" />
 
 </RelativeLayout>

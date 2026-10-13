@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor"
+    android:background="@drawable/bg_header_gradient"
     tools:context=".SplashScreen">
 
     <LinearLayout
@@ -18,18 +17,34 @@
         <ImageView
             android:layout_width="220dp"
             android:layout_height="wrap_content"
+            android:contentDescription="3S logo"
             android:src="@drawable/logo_white" />
+
+        <View
+            android:layout_width="36dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="#59FFFFFF" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2025 - 26"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-
+            android:layout_marginTop="14dp"
+            android:text="Crafted catalogues, three worlds"
+            android:textColor="@color/whiteMuted"
+            android:textSize="14sp" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:letterSpacing="0.18"
+        android:text="3S · TROPHYVERSE · VERBOSE"
+        android:textColor="#73FFFFFF"
+        android:textSize="10sp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -40,6 +55,5 @@
         android:layout_marginBottom="50dp"
         android:indeterminate="true"
         android:indeterminateTint="@android:color/white" />
-
 
 </RelativeLayout>

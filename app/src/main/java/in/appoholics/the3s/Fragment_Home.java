@@ -52,6 +52,7 @@ import java.util.List;
 public class Fragment_Home extends Fragment {
 
     private Button loginButton;
+    private Button currencyButton;
     private TextView headerLabel;
     private View threeSButton, trophyverseButton, verboseButton;
     private TextView threeSLabel, trophyverseLabel, verboseLabel;
@@ -100,6 +101,8 @@ public class Fragment_Home extends Fragment {
      */
     private void initializeViews(View view) {
         loginButton = view.findViewById(R.id.login);
+        currencyButton = view.findViewById(R.id.currency);
+        currencyButton.setOnClickListener(v -> showCurrencyPicker());
         headerLabel = view.findViewById(R.id.headerLabel);
         threeSButton = view.findViewById(R.id.three_s_button);
         trophyverseButton = view.findViewById(R.id.trophyverse_button);
@@ -148,6 +151,7 @@ public class Fragment_Home extends Fragment {
 
             if (ParseUser.getCurrentUser() != null) {
                 // If yes, perform logout
+                DealerCurrency.clearSelection();
                 ParseUser.logOutInBackground(e -> {
                     if (e == null) {
                         Toast.makeText(getContext(), "Logged out successfully.", Toast.LENGTH_SHORT).show();
@@ -161,6 +165,26 @@ public class Fragment_Home extends Fragment {
                 showLoginDialog();
             }
         });
+    }
+
+    /** Pick the currency every price is shown in (grid, detail, builder, PDF, share). */
+    private void showCurrencyPicker() {
+        if (getContext() == null) return;
+        java.util.List<DealerCurrency.Entry> opts = DealerCurrency.options();
+        String[] labels = new String[opts.size()];
+        int checked = 0;
+        for (int i = 0; i < opts.size(); i++) {
+            labels[i] = opts.get(i).label();
+            if (opts.get(i).code.equals(DealerCurrency.current().code)) checked = i;
+        }
+        new androidx.appcompat.app.AlertDialog.Builder(getContext())
+                .setTitle("Show prices in")
+                .setSingleChoiceItems(labels, checked, (d, which) -> {
+                    DealerCurrency.select(opts.get(which).code);
+                    currencyButton.setText(opts.get(which).code);
+                    d.dismiss();
+                })
+                .show();
     }
 
     private void showLoginDialog() {
@@ -202,6 +226,10 @@ public class Fragment_Home extends Fragment {
     private void updateLoginButtonState() {
         boolean loggedIn = ParseUser.getCurrentUser() != null;
         loginButton.setText(loggedIn ? "Logout" : "Login");
+        // Currency switcher: only dealers the portal gave more than one currency
+        boolean multi = loggedIn && DealerCurrency.canSwitch();
+        currencyButton.setVisibility(multi ? View.VISIBLE : View.GONE);
+        if (multi) currencyButton.setText(DealerCurrency.current().code);
         // WhatsApp (channels + enquiry chats): dealer-only + portal switch
         boolean showWa = loggedIn && getContext() != null && UserStatus.showWhatsApp(getContext());
         if (whatsappFab != null) whatsappFab.setVisibility(showWa ? View.VISIBLE : View.GONE);

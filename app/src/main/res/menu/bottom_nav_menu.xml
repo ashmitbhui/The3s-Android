@@ -19,6 +19,6 @@
     <item
         android:id="@+id/nav_docs"
         android:icon="@drawable/ic_docs"
-        android:title="Videos" />
+        android:title="Marketing" />
 
 </menu>

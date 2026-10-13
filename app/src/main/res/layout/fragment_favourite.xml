@@ -4,61 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F2F5"
+    android:background="@color/bodyLight"
     android:orientation="vertical">
 
+    <!-- Immersive header -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/primaryColor"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingStart="16dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="18dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:fontFamily="sans-serif-medium"
-            android:text="3s  |  ⚓︎"
-            android:textColor="@color/white"
-            android:textSize="24sp"
+            android:text="My Favourites"
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/white"
+            android:background="@drawable/bg_login_pill_light"
+            android:minWidth="80dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:stateListAnimator="@null"
             android:text="Login"
             android:textAllCaps="false"
-            android:textColor="@android:color/darker_gray"
-            app:cornerRadius="10dp" />
-
-
+            android:textColor="@color/textPrimary"
+            android:textSize="13sp" />
     </RelativeLayout>
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:title="My Favorites"
-            app:titleTextColor="@color/black" />
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favorites_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/app_bar_layout"
         android:clipToPadding="false"
         android:padding="8dp"
         android:visibility="gone"
@@ -69,37 +59,44 @@
 
     <LinearLayout
         android:id="@+id/empty_state_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="32dp"
         tools:visibility="gone">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:contentDescription="No favorites icon"
-            android:src="@drawable/ic_favourite_large"
-            app:tint="@android:color/darker_gray" />
+        <FrameLayout
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/bg_icon_circle">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:contentDescription="No favorites icon"
+                android:src="@drawable/ic_favourite_large"
+                app:tint="@color/primaryColor" />
+        </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="No Favorites Yet"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:fontFamily="sans-serif-medium"
+            android:text="No favourites yet"
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Tap the heart on any product to save it here."
+            android:text="Tap the heart on any product to keep it here."
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textColor="@color/captionMuted"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

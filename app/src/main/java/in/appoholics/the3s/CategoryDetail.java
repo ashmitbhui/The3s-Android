@@ -470,10 +470,9 @@ public class CategoryDetail extends AppCompatActivity implements ProductAdapter.
     }
 
     private void updatePriceRangeText(TextView textView, List<Float> values) {
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
-        currencyFormat.setMaximumFractionDigits(0);
-        String min = currencyFormat.format(values.get(0));
-        String max = currencyFormat.format(values.get(1));
+        int digits = DealerCurrency.isINR() ? 0 : 2;
+        String min = DealerCurrency.format(values.get(0), digits);
+        String max = DealerCurrency.format(values.get(1), digits);
         textView.setText(String.format("%s - %s", min, max));
     }
 }

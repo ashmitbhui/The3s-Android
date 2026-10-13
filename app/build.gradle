@@ -1,6 +1,13 @@
 plugins {
     alias(libs.plugins.android.application)
 }
+
+// Push goes live automatically once app/google-services.json is added
+// (from the Firebase console). Without the file the app builds and runs
+// exactly as before, just without push registration.
+if (file('google-services.json').exists()) {
+    apply plugin: 'com.google.gms.google-services'
+}
 android {
     namespace 'in.appoholics.the3s'
     compileSdk 36
@@ -9,10 +16,14 @@ android {
         applicationId "in.appoholics.the3s"
         minSdk 25
         targetSdk 36
-        versionCode 50
-        versionName "3.1.1"
+        versionCode 53
+        versionName "4.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 
     buildTypes {
@@ -33,6 +44,8 @@ dependencies {
     implementation libs.activity
     implementation libs.constraintlayout
     implementation "com.github.parse-community.Parse-SDK-Android:parse:4.3.0"
+    implementation platform("com.google.firebase:firebase-bom:33.7.0")
+    implementation "com.google.firebase:firebase-messaging"
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("com.google.android.material:material:1.13.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.1")

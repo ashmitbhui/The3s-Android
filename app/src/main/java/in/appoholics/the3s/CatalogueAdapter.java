@@ -125,7 +125,7 @@ public class CatalogueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         void bind(Product product) {
             name.setText(product.getName());
             if (UserStatus.isLoggedIn()) {   // dealer prices are login-only
-                price.setText(String.format(java.util.Locale.getDefault(), "₹%,.0f", product.getPrice()));
+                price.setText(DealerCurrency.format(product.getPrice(), DealerCurrency.isINR() ? 0 : 2));
                 price.setVisibility(View.VISIBLE);
             } else {
                 price.setVisibility(View.GONE);

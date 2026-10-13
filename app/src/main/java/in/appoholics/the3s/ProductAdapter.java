@@ -59,9 +59,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         // Price Visibility Logic
         if (ParseUser.getCurrentUser() != null) {
-            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
-            currencyFormat.setMaximumFractionDigits(0);
-            holder.price.setText(currencyFormat.format(product.getPrice()));
+            holder.price.setText(DealerCurrency.format(product.getPrice(), DealerCurrency.isINR() ? 0 : 2));
             holder.price.setVisibility(View.VISIBLE);
         } else {
             holder.price.setVisibility(View.GONE);

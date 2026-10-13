@@ -191,9 +191,7 @@ public class ProductDetail extends AppCompatActivity {
 
         if (ParseUser.getCurrentUser() != null) {
             // If logged in, show the price
-            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
-            currencyFormat.setMaximumFractionDigits(0);
-            priceTextView.setText(currencyFormat.format(DealerPricing.apply(product.getNumber("Price"))));
+            priceTextView.setText(DealerCurrency.format(DealerPricing.apply(product.getNumber("Price")), DealerCurrency.isINR() ? 0 : 2));
             priceTextView.setVisibility(View.VISIBLE);
         } else {
             // If not logged in, hide the price

@@ -113,9 +113,7 @@ public class PdfGenerator {
                         cell.add(new Paragraph(product.getName()).setBold().setFontSize(10));
 
                         if (showPrices) {
-                            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
-                            currencyFormat.setMaximumFractionDigits(0);
-                            cell.add(new Paragraph("Rs. "+currencyFormat.format(product.getPrice())).setFontSize(9));
+                            cell.add(new Paragraph(DealerCurrency.pdfLabel(product.getPrice())).setFontSize(9));
                         }
                         cell.add(new Paragraph(product.getDetail()).setFontSize(8).setItalic());
 

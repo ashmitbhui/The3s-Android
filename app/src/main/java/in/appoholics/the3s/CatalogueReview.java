@@ -54,6 +54,7 @@ public class CatalogueReview extends AppCompatActivity implements CatalogueRevie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalogue_review);
+        EdgeToEdgeHelper.apply(this, R.id.catalogue_review_root, R.id.app_bar_layout, R.id.confirm_button_container);
 
         masterSelectedProducts = getIntent().getParcelableArrayListExtra("SELECTED_PRODUCTS");
         if (masterSelectedProducts == null || masterSelectedProducts.isEmpty()) {
@@ -182,6 +183,7 @@ public class CatalogueReview extends AppCompatActivity implements CatalogueRevie
 
         RadioGroup marginTypeGroup = dialog.findViewById(R.id.margin_type_group);
         EditText marginValueEditText = dialog.findViewById(R.id.margin_value_edittext);
+        ((android.widget.RadioButton) dialog.findViewById(R.id.radio_value)).setText("Fixed Value (" + DealerCurrency.symbol() + ")");
         Button applyMarginButton = dialog.findViewById(R.id.apply_margin_button);
 
         applyMarginButton.setOnClickListener(v -> {
@@ -195,7 +197,8 @@ public class CatalogueReview extends AppCompatActivity implements CatalogueRevie
 
             for (Product product : masterSelectedProducts) {
                 double originalPrice = product.getPrice();
-                double newPrice = isPercentage ? (originalPrice * (1 + (value / 100.0))) : (originalPrice + value);
+                // a fixed margin is typed in the currency the dealer is viewing in; prices stay in INR
+                double newPrice = isPercentage ? (originalPrice * (1 + (value / 100.0))) : (originalPrice + DealerCurrency.toINR(value));
                 product.setPrice(newPrice);
             }
 

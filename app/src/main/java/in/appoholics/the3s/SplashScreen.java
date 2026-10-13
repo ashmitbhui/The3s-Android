@@ -26,7 +26,7 @@ public class SplashScreen extends AppCompatActivity {
      * series instead of Basic.CurrentSeries; release builds always follow the
      * server. Set to null to follow the server in debug builds too.
      */
-    private static final String DEBUG_SERIES_OVERRIDE = "26-27";
+    private static final String DEBUG_SERIES_OVERRIDE = null;   // 26-27 is the published series now
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +65,8 @@ public class SplashScreen extends AppCompatActivity {
                     boolean showWa = !object.has("ShowWhatsApp") || object.getBoolean("ShowWhatsApp");
                     getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit()
                             .putBoolean("SHOW_WHATSAPP", showWa).apply();
+                    // Portal rate table for dealers priced in other currencies
+                    DealerCurrency.storeTable(object.getJSONObject("Currencies"));
                 } else if (SessionGuard.recover(e, () -> fetchBasicSettings())) {
                     return;   // stale dealer session cleared; the retry continues from here
                 } else {

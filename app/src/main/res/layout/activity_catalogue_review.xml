@@ -2,30 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/catalogue_review_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/primaryColor">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_gradient"
+        android:paddingStart="14dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="16dp">
 
         <ImageButton
             android:id="@+id/back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_back" />
+            android:background="@drawable/bg_back_circle"
+            android:contentDescription="Back"
+            android:padding="7dp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/back_button"
+            android:fontFamily="sans-serif-medium"
             android:text="Review Catalogue"
-            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textSize="17sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
@@ -71,7 +82,9 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Margin to Prices" />
+            android:text="＋ Add Margin to Prices"
+            android:textAllCaps="false"
+            android:textColor="@color/priceGreen" />
 
     </LinearLayout>
 
@@ -89,6 +102,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="Confirm &amp; Create PDF" />
+            android:text="Confirm &amp; Create PDF"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/primaryColor"
+            app:cornerRadius="24dp" />
     </LinearLayout>
 </RelativeLayout>

@@ -2,12 +2,12 @@
 <resources>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#f7d24a</color>
+    <color name="purple_700">#0B3D2E</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
 
-    <color name="primaryColor">#f7d24a</color>
+    <color name="primaryColor">#0B3D2E</color>
     <color name="secondaryColor">#3498DB</color>
 
     <color name="white">#FFFFFFFF</color>
@@ -17,5 +17,23 @@
     <color name="greenHeader">#11b698</color>
     <color name="gray">#ebecec</color>
     <color name="lightGreen">#c5dc43</color>
+
+    <!-- Modern home redesign tokens -->
+    <color name="screenBackground">#F5F6F8</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="ink">#171A23</color>
+    <color name="textPrimary">#171A23</color>
+    <color name="textSecondary">#8A8F9C</color>
+    <color name="divider">#E8EAEF</color>
+    <color name="iconCircle">#E7EFEA</color>
+    <color name="brandYellow">#F7D24A</color>
+    <color name="primaryDark">#072A20</color>
+    <color name="primaryTint">#E7EFEA</color>
+    <color name="whiteTranslucent">#1AFFFFFF</color>
+    <color name="whiteMuted">#B3FFFFFF</color>
+    <color name="bodyLight">#F4F7F5</color>
+    <color name="chipText">#5A6B62</color>
+    <color name="captionMuted">#6B7A71</color>
+    <color name="priceGreen">#16604A</color>
 
 </resources>

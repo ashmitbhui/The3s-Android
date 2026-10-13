@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    android:layout_margin="6dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeColor="#E1E8E3"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +20,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/product_image_description"
-            android:scaleType="centerCrop"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +51,9 @@
                 android:id="@+id/product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/textPrimary"
+                android:textSize="14sp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 tools:text="Product Name Here" />
@@ -58,8 +62,10 @@
                 android:id="@+id/product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/priceGreen"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 tools:text="₹1,299" />
 
             <TextView
@@ -67,10 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:minLines="6"
-                android:maxLines="6"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/captionMuted"
                 android:textSize="12sp"
                 tools:text="High-quality, durable electronic gadget with a sleek finish." />
 

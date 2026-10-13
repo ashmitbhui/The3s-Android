@@ -246,9 +246,9 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
     private void onBudgetChanged() {
         boolean on = budgetMin != null || budgetMax != null;
         String label;
-        if (budgetMin != null && budgetMax != null) label = "₹" + budgetMin.intValue() + " – ₹" + budgetMax.intValue();
-        else if (budgetMin != null) label = "From ₹" + budgetMin.intValue();
-        else if (budgetMax != null) label = "Up to ₹" + budgetMax.intValue();
+        if (budgetMin != null && budgetMax != null) label = DealerCurrency.format(budgetMin, 0) + " – " + DealerCurrency.format(budgetMax, 0);
+        else if (budgetMin != null) label = "From " + DealerCurrency.format(budgetMin, 0);
+        else if (budgetMax != null) label = "Up to " + DealerCurrency.format(budgetMax, 0);
         else label = "Budget";
         budgetChip.setText(label);
         budgetChip.setCloseIconVisible(on);
@@ -265,8 +265,10 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
         dialog.setContentView(R.layout.dialog_budget);
         android.widget.EditText minField = dialog.findViewById(R.id.budget_min);
         android.widget.EditText maxField = dialog.findViewById(R.id.budget_max);
-        if (budgetMin != null) minField.setText(String.valueOf(budgetMin.intValue()));
-        if (budgetMax != null) maxField.setText(String.valueOf(budgetMax.intValue()));
+        minField.setHint("From " + DealerCurrency.symbol());
+        maxField.setHint("Up to " + DealerCurrency.symbol());
+        if (budgetMin != null) minField.setText(String.valueOf(Math.round(DealerCurrency.convert(budgetMin))));
+        if (budgetMax != null) maxField.setText(String.valueOf(Math.round(DealerCurrency.convert(budgetMax))));
         dialog.findViewById(R.id.budget_clear).setOnClickListener(v -> {
             budgetMin = null; budgetMax = null; onBudgetChanged(); dialog.dismiss();
         });
@@ -277,7 +279,9 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
                 maxField.setError("Must be at least the From amount");
                 return;
             }
-            budgetMin = lo; budgetMax = hi; onBudgetChanged(); dialog.dismiss();
+            budgetMin = lo == null ? null : DealerCurrency.toINR(lo);
+            budgetMax = hi == null ? null : DealerCurrency.toINR(hi);
+            onBudgetChanged(); dialog.dismiss();
         });
         dialog.show();
         if (dialog.getWindow() != null) {

@@ -76,7 +76,8 @@ public final class ProductShare {
         @Nullable Double apply(@Nullable Double p) {
             if (p == null || mode == NONE) return null;
             if (mode == LIST) return p;
-            return isPercent ? p * (1 + value / 100.0) : p + value;
+            // a fixed margin is typed in the currency the dealer is viewing in
+            return isPercent ? p * (1 + value / 100.0) : p + DealerCurrency.toINR(value);
         }
     }
 
@@ -104,6 +105,7 @@ public final class ProductShare {
         View marginRow = dialog.findViewById(R.id.margin_row);
         RadioGroup marginType = dialog.findViewById(R.id.margin_type_group);
         EditText marginValue = dialog.findViewById(R.id.margin_value);
+        ((android.widget.RadioButton) dialog.findViewById(R.id.radio_margin_fixed)).setText(DealerCurrency.symbol());
         Button noPrice = dialog.findViewById(R.id.share_no_price_button);
         Button cont = dialog.findViewById(R.id.share_continue_button);
 
@@ -183,10 +185,7 @@ public final class ProductShare {
         return out.toString().trim();
     }
 
-    static String formatPrice(double p) {
-        if (p == Math.rint(p)) return String.format(Locale.US, "₹%,.0f", p);
-        return String.format(Locale.US, "₹%,.2f", p);
-    }
+    static String formatPrice(double p) { return DealerCurrency.format(p); }
 
     private static void doShare(Activity activity, List<Item> items, Pricing pricing) {
         ProgressDialog progress = new ProgressDialog(activity);
