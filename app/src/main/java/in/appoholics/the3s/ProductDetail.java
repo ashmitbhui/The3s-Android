@@ -187,7 +187,7 @@ public class ProductDetail extends AppCompatActivity {
 
     private void populateTextViews(ParseObject product) {
         nameTextView.setText(product.getString("Name"));
-        descriptionTextView.setText(product.getString("Detail"));
+        descriptionTextView.setText(ProductShare.displayDetail(product.getString("Detail")));
 
         if (ParseUser.getCurrentUser() != null) {
             // If logged in, show the price
@@ -237,7 +237,7 @@ public class ProductDetail extends AppCompatActivity {
                     FavoriteProduct newFavorite = new FavoriteProduct(
                             productId,
                             currentProduct.getString("Name"),
-                            currentProduct.getString("Detail"),
+                            ProductShare.displayDetail(currentProduct.getString("Detail")),
                             String.valueOf(DealerPricing.apply(currentProduct.getNumber("Price"))),
                             imageFile != null ? imageFile.getUrl() : "", currentProduct.getString("Category"), // ✨ ADDED
                             currentProduct.getString("Brand")
@@ -324,7 +324,7 @@ public class ProductDetail extends AppCompatActivity {
         ProductShare.Item item = new ProductShare.Item(
                 currentProduct.getString("Name"),
                 DealerPricing.apply(currentProduct.getNumber("Price")),
-                currentProduct.getString("Detail"),
+                ProductShare.displayDetail(currentProduct.getString("Detail")),
                 currentProduct.getNumber("MOQ"),
                 currentProduct.getNumber("MasterPacking"),
                 images);

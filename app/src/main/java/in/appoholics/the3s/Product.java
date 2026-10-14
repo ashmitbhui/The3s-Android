@@ -19,7 +19,7 @@ public class Product implements Parcelable {
     public Product(String parseObjectId, String name, String detail, double price, String imageUrl, String category, String brand) {
         this.parseObjectId = parseObjectId;
         this.name = name;
-        this.detail = detail;
+        this.detail = ProductShare.displayDetail(detail);   // never show plain-text prices
         this.price = price;
         this.imageUrl = imageUrl;
         this.category = category;

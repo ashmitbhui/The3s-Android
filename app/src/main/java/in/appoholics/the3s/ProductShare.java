@@ -162,7 +162,23 @@ public final class ProductShare {
      * Detail text without minimum-qty / MOQ / master-packing lines. Details are
      * newline-separated (3S) or "; "-separated (Verbose); both are handled.
      */
-    static String detailForSharing(@Nullable String detail) {
+    static String detailForSharing(@Nullable String detail) { return stripDetail(detail, true); }
+
+    private static final java.util.regex.Pattern PRICE_LINE =
+            java.util.regex.Pattern.compile("₹|\\bRs\\.?\\s?\\d|\\bINR\\b|\\bMRP\\b|\\d\\s?/-", java.util.regex.Pattern.CASE_INSENSITIVE);
+
+    /**
+     * Detail text as shown in the app: plain-text prices ("Without Pen & Pad: Rs. 85/-") are
+     * dropped everywhere — they'd bypass login gating, markup and currency conversion.
+     */
+    @Nullable
+    public static String displayDetail(@Nullable String detail) {
+        if (detail == null) return null;
+        String d = stripDetail(detail, false);
+        return d.isEmpty() ? null : d;
+    }
+
+    static String stripDetail(@Nullable String detail, boolean alsoTrade) {
         if (detail == null) return "";
         StringBuilder out = new StringBuilder();
         for (String line : detail.split("\\r?\\n")) {
@@ -170,9 +186,10 @@ public final class ProductShare {
             for (String part : line.split(";")) {
                 String t = part.trim();
                 if (t.isEmpty()) continue;
+                if (PRICE_LINE.matcher(t).find()) continue;
                 String low = t.toLowerCase(Locale.ROOT);
                 boolean trade = false;
-                for (String k : TRADE_ONLY) if (low.contains(k)) { trade = true; break; }
+                if (alsoTrade) for (String k : TRADE_ONLY) if (low.contains(k)) { trade = true; break; }
                 if (trade) continue;
                 if (kept.length() > 0) kept.append("; ");
                 kept.append(t);
