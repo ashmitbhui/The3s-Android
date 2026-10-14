@@ -76,27 +76,30 @@ public final class DealerCurrency {
         return out;
     }
 
-    /** Currencies the signed-in dealer may price in (INR first). Just INR when logged out. */
+    /**
+     * Currencies the signed-in dealer may price in, in portal order. INR is not implied —
+     * a dealer can be USD-only. Just INR when logged out or nothing is assigned.
+     */
     @NonNull
     public static List<Entry> options() {
         List<Entry> out = new ArrayList<>();
-        out.add(Entry.INR_ENTRY);
         ParseUser u = ParseUser.getCurrentUser();
-        if (u == null) return out;
-        Map<String, Entry> t = table();
-        List<String> codes = u.getList("Currencies");
-        if (codes == null) return out;
-        for (String c : codes) {
-            if (c == null) continue;
-            Entry e = t.get(c.toUpperCase(Locale.ROOT));
-            if (e != null && !INR.equals(e.code) && !out.contains(e)) out.add(e);
+        List<String> codes = u == null ? null : u.<String>getList("Currencies");
+        if (codes != null) {
+            Map<String, Entry> t = table();
+            for (String c : codes) {
+                if (c == null) continue;
+                Entry e = t.get(c.toUpperCase(Locale.ROOT));
+                if (e != null && !out.contains(e)) out.add(e);
+            }
         }
+        if (out.isEmpty()) out.add(Entry.INR_ENTRY);
         return out;
     }
 
     public static boolean canSwitch() { return options().size() > 1; }
 
-    /** The currency prices are shown in: the dealer's pick, else their portal default, else INR. */
+    /** The currency prices are shown in: the dealer's pick, else their portal default, else the first allowed one. */
     @NonNull
     public static Entry current() {
         List<Entry> opts = options();
@@ -105,7 +108,7 @@ public final class DealerCurrency {
         ParseUser u = ParseUser.getCurrentUser();
         String def = u == null ? null : u.getString("DefaultCurrency");
         if (def != null) for (Entry e : opts) if (e.code.equalsIgnoreCase(def)) return e;
-        return Entry.INR_ENTRY;
+        return opts.get(0);
     }
 
     public static void select(@NonNull String code) { prefs().edit().putString(SELECTED_KEY, code).apply(); }
