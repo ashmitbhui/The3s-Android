@@ -49,6 +49,8 @@ public class CatalogueReview extends AppCompatActivity implements CatalogueRevie
     private RecyclerView recyclerView;
     private View loggedInOptionsContainer;
     ImageButton back;
+    /** Export without any prices (a plain picture catalogue). */
+    private boolean noPrices = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,15 @@ public class CatalogueReview extends AppCompatActivity implements CatalogueRevie
         loggedInOptionsContainer = findViewById(R.id.logged_in_options_container);
         MaterialButton confirmButton = findViewById(R.id.confirm_button);
         MaterialButton addMarginButton = findViewById(R.id.add_margin_button);
+        MaterialButton noPricesButton = findViewById(R.id.no_prices_button);
+        noPricesButton.setOnClickListener(v -> {
+            noPrices = !noPrices;
+            noPricesButton.setText(noPrices ? "Show prices" : "Without prices");
+            noPricesButton.setTextColor(getResources().getColor(noPrices ? R.color.primaryColor : R.color.chipText, getTheme()));
+            addMarginButton.setVisibility(noPrices ? View.GONE : View.VISIBLE);
+            findViewById(R.id.no_prices_hint).setVisibility(noPrices ? View.VISIBLE : View.GONE);
+            adapter.setShowPrices(!noPrices);
+        });
         back = findViewById(R.id.back_button);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +249,7 @@ public class CatalogueReview extends AppCompatActivity implements CatalogueRevie
         progressDialog.show();
 
         boolean isLoggedIn = (ParseUser.getCurrentUser() != null);
-        PdfGenerator.createCatalogue(this, masterSelectedProducts, isLoggedIn, filename, new PdfGenerator.PdfGenerationListener() {
+        PdfGenerator.createCatalogue(this, masterSelectedProducts, isLoggedIn && !noPrices, filename, new PdfGenerator.PdfGenerationListener() {
             @Override
             public void onSuccess(Uri pdfUri) {
                 progressDialog.dismiss();

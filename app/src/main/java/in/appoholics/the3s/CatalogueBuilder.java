@@ -40,6 +40,7 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
     private MaterialButtonToggleGroup brandToggleGroup;
     private ChipGroup categoryChipGroup;
     private Chip budgetChip;
+    private Chip selectAllChip;
     /** Customer budget per piece (on the dealer's price); null = no limit. */
     private Double budgetMin = null, budgetMax = null;
     private String currentCategory = null;
@@ -71,6 +72,8 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
         brandToggleGroup = findViewById(R.id.brand_toggle_group);
         categoryChipGroup = findViewById(R.id.category_chip_group);
         budgetChip = findViewById(R.id.budget_chip);
+        selectAllChip = findViewById(R.id.select_all_chip);
+        selectAllChip.setOnClickListener(v -> toggleSelectAll());
         budgetChip.setOnClickListener(v -> showBudgetDialog());
         budgetChip.setOnCloseIconClickListener(v -> { budgetMin = null; budgetMax = null; onBudgetChanged(); });
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -231,6 +234,38 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
         // displayList with Brand and all Category headers for the selected brand.
         // For simplicity, we'll just show one category at a time.
         adapter.notifyDataSetChanged();
+        updateSelectAllChip();
+    }
+
+    // ---- select all (everything currently shown) ----
+
+    private List<Product> visibleProducts() {
+        List<Product> out = new ArrayList<>();
+        for (Object o : displayList) if (o instanceof Product) out.add((Product) o);
+        return out;
+    }
+
+    private boolean allVisibleSelected() {
+        List<Product> v = visibleProducts();
+        return !v.isEmpty() && selectedProducts.containsAll(v);
+    }
+
+    /** Tick every visible product, or untick them all when they already are. */
+    private void toggleSelectAll() {
+        List<Product> v = visibleProducts();
+        if (v.isEmpty()) return;
+        if (allVisibleSelected()) selectedProducts.removeAll(v); else selectedProducts.addAll(v);
+        adapter.notifyDataSetChanged();
+        doneButton.setEnabled(!selectedProducts.isEmpty());
+        doneButton.setText(selectedProducts.isEmpty() ? "Done" : "Done (" + selectedProducts.size() + ")");
+        updateSelectAllChip();
+    }
+
+    private void updateSelectAllChip() {
+        boolean on = allVisibleSelected();
+        selectAllChip.setText(on ? "✓ All selected" : "Select all");
+        selectAllChip.setChipBackgroundColorResource(on ? R.color.primaryColor : android.R.color.white);
+        selectAllChip.setTextColor(getResources().getColor(on ? android.R.color.white : R.color.chipText, getTheme()));
     }
 
     // ---- customer budget filter ----
@@ -310,6 +345,7 @@ public class CatalogueBuilder extends AppCompatActivity implements CatalogueAdap
         }
         doneButton.setEnabled(!selectedProducts.isEmpty());
         doneButton.setText(selectedProducts.isEmpty() ? "Done" : "Done (" + selectedProducts.size() + ")");
+        updateSelectAllChip();
     }
 
 }

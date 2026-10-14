@@ -25,6 +25,10 @@ public class CatalogueReviewAdapter extends RecyclerView.Adapter<CatalogueReview
     private final List<Product> productList;
     private final OnItemRemovedListener listener;
 
+    /** False while the dealer has chosen a catalogue without prices. */
+    private boolean showPrices = true;
+    public void setShowPrices(boolean show) { showPrices = show; notifyDataSetChanged(); }
+
     public CatalogueReviewAdapter(Context context, List<Product> productList, OnItemRemovedListener listener) {
         this.context = context;
         this.productList = productList;
@@ -43,7 +47,7 @@ public class CatalogueReviewAdapter extends RecyclerView.Adapter<CatalogueReview
         Product product = productList.get(position);
         holder.name.setText(product.getName());
 
-        if (UserStatus.isLoggedIn()) {   // dealer prices are login-only
+        if (UserStatus.isLoggedIn() && showPrices) {   // dealer prices are login-only
             holder.price.setText(DealerCurrency.format(product.getPrice(), DealerCurrency.isINR() ? 0 : 2));
             holder.price.setVisibility(View.VISIBLE);
         } else {

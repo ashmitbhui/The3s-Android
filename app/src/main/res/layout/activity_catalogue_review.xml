@@ -77,14 +77,42 @@
         android:visibility="gone"
         tools:visibility="visible">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/add_margin_button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
+        <!-- Pricing for the PDF: list price (default), with margin, or no prices at all -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="＋ Add Margin to Prices"
-            android:textAllCaps="false"
-            android:textColor="@color/priceGreen" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_margin_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="＋ Add Margin to Prices"
+                android:textAllCaps="false"
+                android:textColor="@color/priceGreen" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/no_prices_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Without prices"
+                android:textAllCaps="false"
+                android:textColor="@color/chipText" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/no_prices_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingBottom="6dp"
+            android:text="The PDF will show photos and details only — no prices."
+            android:textColor="@color/chipText"
+            android:textSize="12sp"
+            android:visibility="gone" />
 
     </LinearLayout>
 
