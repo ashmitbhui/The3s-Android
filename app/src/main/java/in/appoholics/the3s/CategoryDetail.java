@@ -279,6 +279,7 @@ public class CategoryDetail extends AppCompatActivity implements ProductAdapter.
 
         query.whereEqualTo("isEnabled", true);
         query.orderByAscending("Order");
+        query.setLimit(1000);   // Parse defaults to 100 — Trophies alone has 143
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
